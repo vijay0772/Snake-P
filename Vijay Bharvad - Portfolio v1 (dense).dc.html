@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:oklch(0.15 0.006 160);color:oklch(0.97 0.004 160);font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:oklch(0.87 0.21 140)}
+  ::selection{background:oklch(0.87 0.21 140);color:oklch(0.18 0.03 150)}
+  @keyframes vbpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.82)}}
+  @keyframes vbblink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes vbmarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes vbglow{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(1)}50%{opacity:.85;transform:translate(-50%,-50%) scale(1.12)}}
+  @keyframes vbfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+</style>
+</helmet>
+<div id="vb-root" style="position:relative">
+
+  <div aria-hidden="true" style="position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(oklch(0.97 0.004 160 / 0.028) 1px,transparent 1px),linear-gradient(90deg,oklch(0.97 0.004 160 / 0.028) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(circle at 50% 20%,black,transparent 78%);-webkit-mask-image:radial-gradient(circle at 50% 20%,black,transparent 78%)"></div>
+
+  <nav id="vb-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(20px,5vw,72px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s">
+    <a href="#top" style="display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:-0.02em">
+      <span style="display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150);font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px">VB</span>
+      <span style="font-size:15px">Vijay Bharvad</span>
+    </a>
+    <div style="display:flex;align-items:center;gap:clamp(14px,2.4vw,34px);flex-wrap:wrap;justify-content:flex-end">
+      <a href="#about" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:oklch(0.68 0.012 160);letter-spacing:0.02em">About</a>
+      <a href="#work" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:oklch(0.68 0.012 160);letter-spacing:0.02em">Experience</a>
+      <a href="#projects" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:oklch(0.68 0.012 160);letter-spacing:0.02em">Work</a>
+      <a href="#stack" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:oklch(0.68 0.012 160);letter-spacing:0.02em">Stack</a>
+      <a href="#contact" data-magnetic="1" style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;border:1px solid oklch(0.87 0.21 140 / 0.55);color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace;font-size:12.5px;font-weight:500;transition:background .25s,color .25s" style-hover="background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150)">Get in touch</a>
+    </div>
+  </nav>
+
+  <main style="position:relative;z-index:1">
+
+    <!-- HERO -->
+    <section id="top" data-screen-label="Hero" style="min-height:100svh;display:flex;align-items:center;padding:132px clamp(20px,5vw,72px) 72px;position:relative">
+      <div aria-hidden="true" style="position:absolute;top:16%;left:26%;width:min(680px,70vw);height:min(680px,70vw);border-radius:50%;background:radial-gradient(circle,oklch(0.87 0.21 140 / 0.16),transparent 62%);filter:blur(20px);animation:vbglow 9s ease-in-out infinite;z-index:0"></div>
+      <div style="max-width:1200px;margin:0 auto;width:100%;position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,80px);align-items:center">
+
+        <div style="flex:1 1 460px;min-width:min(100%,460px)">
+          <div data-reveal="1" style="display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;border:1px solid oklch(0.3 0.05 145);background:oklch(0.2 0.02 150 / 0.5);margin-bottom:30px">
+            <span style="width:8px;height:8px;border-radius:50%;background:oklch(0.87 0.21 140);animation:vbpulse 1.8s ease-in-out infinite;box-shadow:0 0 12px oklch(0.87 0.21 140)"></span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.8 0.05 145);letter-spacing:0.02em">Open to founding &amp; early-stage roles</span>
+          </div>
+
+          <p data-reveal="1" data-delay="60" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.66 0.012 160);letter-spacing:0.06em;margin-bottom:20px;text-transform:uppercase">Software Engineer · Halluminate <span style="color:oklch(0.87 0.21 140)">(YC S25)</span> · NYC</p>
+
+          <h1 data-reveal="1" data-delay="120" style="font-size:clamp(2.9rem,7.4vw,6.1rem);line-height:0.94;letter-spacing:-0.035em;font-weight:700;margin-bottom:26px">
+            I build AI systems<br>that survive<br><span style="color:oklch(0.87 0.21 140)">production.</span>
+          </h1>
+
+          <p data-reveal="1" data-delay="200" style="font-size:clamp(1.05rem,1.5vw,1.28rem);line-height:1.55;color:oklch(0.72 0.012 160);max-width:52ch;margin-bottom:38px">
+            Founding-mindset engineer with 2+ years shipping event-driven, LLM-orchestrated full-stack products at startups — from contextual eval pipelines to APIs serving <span style="color:oklch(0.97 0.004 160);font-weight:500">5K+ users</span> with measurable business impact.
+          </p>
+
+          <div data-reveal="1" data-delay="280" style="display:flex;flex-wrap:wrap;gap:14px">
+            <a href="#projects" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150);font-weight:600;font-size:15px;transition:box-shadow .3s,transform .2s" style-hover="box-shadow:0 12px 40px oklch(0.87 0.21 140 / 0.35)">
+              View selected work
+              <span style="font-family:'JetBrains Mono',monospace">↗</span>
+            </a>
+            <a href="#contact" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;border:1px solid oklch(0.31 0.009 160);color:oklch(0.9 0.004 160);font-weight:500;font-size:15px;background:oklch(0.2 0.007 160 / 0.4);transition:border-color .25s,background .25s" style-hover="border-color:oklch(0.5 0.02 150);background:oklch(0.24 0.008 160 / 0.6)">
+              Get in touch
+            </a>
+          </div>
+        </div>
+
+        <!-- LIVE EVAL CONSOLE -->
+        <div data-reveal="1" data-delay="220" style="flex:1 1 380px;min-width:min(100%,340px)">
+          <div style="border:1px solid oklch(0.28 0.008 160);border-radius:16px;background:oklch(0.175 0.007 160 / 0.85);backdrop-filter:blur(10px);overflow:hidden;box-shadow:0 30px 80px oklch(0.1 0.01 160 / 0.6);animation:vbfloat 7s ease-in-out infinite">
+            <div style="display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid oklch(0.25 0.008 160);background:oklch(0.2 0.007 160)">
+              <span style="width:11px;height:11px;border-radius:50%;background:oklch(0.6 0.15 25)"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:oklch(0.8 0.14 85)"></span>
+              <span style="width:11px;height:11px;border-radius:50%;background:oklch(0.75 0.16 145)"></span>
+              <span style="margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:11.5px;color:oklch(0.6 0.01 160)">eval://halluminate · <span style="color:oklch(0.87 0.21 140)">live</span></span>
+            </div>
+            <div style="padding:20px 20px 22px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.95">
+              <div style="color: oklch(0.6 0.01 160); background: linear-gradient(180deg, #EF9A60, #28211a)"><span style="color:oklch(0.87 0.21 140)">$</span> eval.run(model=<span style="color:oklch(0.82 0.09 200)">"prod-v4"</span>)</div>
+              <div style="display:flex;justify-content:space-between;margin-top:12px"><span style="color:oklch(0.82 0.1 145)">✓</span><span style="color:oklch(0.78 0.012 160);flex:1;margin-left:12px">groundedness</span><span data-score="0.98" style="color:oklch(0.87 0.21 140);font-weight:500">0.98</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:oklch(0.82 0.1 145)">✓</span><span style="color:oklch(0.78 0.012 160);flex:1;margin-left:12px">intent.match</span><span data-score="0.96" style="color:oklch(0.87 0.21 140);font-weight:500">0.96</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:oklch(0.82 0.1 145)">✓</span><span style="color:oklch(0.78 0.012 160);flex:1;margin-left:12px">confidence</span><span data-score="0.94" style="color:oklch(0.87 0.21 140);font-weight:500">0.94</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:oklch(0.82 0.14 70)">⚠</span><span style="color:oklch(0.78 0.012 160);flex:1;margin-left:12px">hallucination</span><span data-score="0.02" style="color:oklch(0.82 0.14 70);font-weight:500">0.02</span></div>
+              <div style="height:1px;background:oklch(0.26 0.008 160);margin:14px 0"></div>
+              <div style="color:oklch(0.7 0.012 160)"><span style="color:oklch(0.87 0.21 140)">▸</span> 5,000 users · 0 incidents<span id="vb-caret" style="display:inline-block;width:8px;height:15px;background:oklch(0.87 0.21 140);margin-left:6px;vertical-align:-2px;animation:vbblink 1s step-end infinite"></span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <section data-screen-label="Impact stats" style="border-top:1px solid oklch(0.23 0.008 160);border-bottom:1px solid oklch(0.23 0.008 160);background:oklch(0.17 0.007 160 / 0.5)">
+      <div style="max-width:1200px;margin:0 auto;padding:clamp(40px,6vw,64px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:clamp(28px,4vw,48px)">
+        <div data-reveal="1" style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:clamp(2.4rem,4.5vw,3.4rem);font-weight:700;letter-spacing:-0.03em;line-height:1"><span data-count="5">5</span><span style="color:oklch(0.87 0.21 140)">K+</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.64 0.012 160);letter-spacing:0.02em">active users supported</div>
+        </div>
+        <div data-reveal="1" data-delay="80" style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:clamp(2.4rem,4.5vw,3.4rem);font-weight:700;letter-spacing:-0.03em;line-height:1"><span data-count="25">25</span><span style="color:oklch(0.87 0.21 140)">%</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.64 0.012 160);letter-spacing:0.02em">engagement growth</div>
+        </div>
+        <div data-reveal="1" data-delay="160" style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:clamp(2.4rem,4.5vw,3.4rem);font-weight:700;letter-spacing:-0.03em;line-height:1"><span data-count="2">2</span><span style="color:oklch(0.87 0.21 140)">×</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.64 0.012 160);letter-spacing:0.02em">faster page loads</div>
+        </div>
+        <div data-reveal="1" data-delay="240" style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:clamp(2.4rem,4.5vw,3.4rem);font-weight:700;letter-spacing:-0.03em;line-height:1"><span data-count="50">50</span><span style="color:oklch(0.87 0.21 140)">%</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.64 0.012 160);letter-spacing:0.02em">lower API latency</div>
+        </div>
+        <div data-reveal="1" data-delay="320" style="display:flex;flex-direction:column;gap:8px">
+          <div style="font-size:clamp(2.4rem,4.5vw,3.4rem);font-weight:700;letter-spacing:-0.03em;line-height:1"><span data-count="50">50</span><span style="color:oklch(0.87 0.21 140)">+</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.64 0.012 160);letter-spacing:0.02em">API routes shipped</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" data-screen-label="About" style="scroll-margin-top:80px;padding:clamp(90px,13vh,170px) clamp(20px,5vw,72px)">
+      <div style="max-width:1200px;margin:0 auto">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:56px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.87 0.21 140);letter-spacing:0.04em">01 / About</span>
+          <span style="flex:1;height:1px;background:oklch(0.26 0.008 160)"></span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:clamp(40px,6vw,90px)">
+          <div style="flex:1 1 520px;min-width:min(100%,320px)">
+            <p data-reveal="1" style="font-size:clamp(1.5rem,2.9vw,2.3rem);line-height:1.32;letter-spacing:-0.02em;font-weight:500">
+              I care less about the stack and more about what ships. My work lives where <span style="color:oklch(0.87 0.21 140)">AI meets production reality</span> — deterministic LLM outputs, event-driven systems, and APIs that hold up under real load.
+            </p>
+          </div>
+          <div style="flex:1 1 320px;min-width:min(100%,280px);display:flex;flex-direction:column;gap:26px">
+            <p data-reveal="1" data-delay="80" style="font-size:1.02rem;line-height:1.68;color:oklch(0.72 0.012 160)">
+              Currently a Software Engineer at <span style="color:oklch(0.9 0.004 160)">Halluminate (YC S25)</span>, building the core APIs behind automated LLM evaluation — contextual grounding, confidence scoring, and intent classification that make model outputs trustworthy in production.
+            </p>
+            <p data-reveal="1" data-delay="160" style="font-size:1.02rem;line-height:1.68;color:oklch(0.72 0.012 160)">
+              Before that I shipped full-stack platforms across two more startups, owning architecture end-to-end and iterating in fast, measurable sprints. M.S. in Computer Science from Illinois Tech.
+            </p>
+            <div data-reveal="1" data-delay="240" style="display:flex;flex-wrap:wrap;gap:10px;margin-top:4px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 13px;border-radius:8px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.74 0.012 160)">0→1 execution</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 13px;border-radius:8px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.74 0.012 160)">LLM pipelines</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:7px 13px;border-radius:8px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.74 0.012 160)">Measurable impact</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="work" data-screen-label="Experience" style="scroll-margin-top:80px;padding:clamp(60px,9vh,120px) clamp(20px,5vw,72px)">
+      <div style="max-width:1200px;margin:0 auto">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:56px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.87 0.21 140);letter-spacing:0.04em">02 / Experience</span>
+          <span style="flex:1;height:1px;background:oklch(0.26 0.008 160)"></span>
+        </div>
+
+        <div style="display:flex;flex-direction:column">
+
+          <div data-reveal="1" style="display:flex;flex-wrap:wrap;gap:clamp(20px,5vw,64px);padding:34px 0;border-top:1px solid oklch(0.24 0.008 160)">
+            <div style="flex:0 0 auto;min-width:200px;display:flex;flex-direction:column;gap:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.6 0.012 160)">Jul 2025 — Present</span>
+              <span style="display:inline-flex;align-items:center;gap:8px;font-size:1.3rem;font-weight:600;letter-spacing:-0.01em">Halluminate</span>
+              <span style="display:inline-flex;align-items:center;width:fit-content;font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 9px;border-radius:6px;background:oklch(0.87 0.21 140 / 0.13);color:oklch(0.87 0.21 140);border:1px solid oklch(0.87 0.21 140 / 0.3)">YC S25 · NYC</span>
+            </div>
+            <div style="flex:1 1 380px">
+              <p style="font-size:1.05rem;font-weight:500;margin-bottom:16px;color:oklch(0.92 0.004 160)">Software Engineer</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:13px">
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Built the core Django/PostgreSQL APIs powering automated LLM evaluation — contextual grounding, confidence scoring, and intent classification for <span style="color:oklch(0.92 0.004 160)">deterministic production outputs</span>.</span></li>
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Containerized deployment with Docker, supporting <span style="color:oklch(0.92 0.004 160)">5K+ active users</span> with zero infrastructure instability.</span></li>
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Ran PostHog analytics and controlled A/B experiments, driving <span style="color:oklch(0.92 0.004 160)">25% engagement growth</span> through data-informed UX.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div data-reveal="1" data-delay="80" style="display:flex;flex-wrap:wrap;gap:clamp(20px,5vw,64px);padding:34px 0;border-top:1px solid oklch(0.24 0.008 160)">
+            <div style="flex:0 0 auto;min-width:200px;display:flex;flex-direction:column;gap:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.6 0.012 160)">Aug 2024 — Jul 2025</span>
+              <span style="font-size:1.3rem;font-weight:600;letter-spacing:-0.01em">Find Me LLC</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.58 0.012 160)">Elmont, NY</span>
+            </div>
+            <div style="flex:1 1 380px">
+              <p style="font-size:1.05rem;font-weight:500;margin-bottom:16px;color:oklch(0.92 0.004 160)">Full-Stack Developer</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:13px">
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Architected and shipped a full-stack social portfolio platform (Next.js / Node.js / AWS) with third-party syncs and webhooks — <span style="color:oklch(0.92 0.004 160)">2× faster loads, 50% lower API latency</span>.</span></li>
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Designed scalable RESTful APIs with CI/CD and automated test coverage, raising deployment confidence and reliability.</span></li>
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Led frontend architecture — reusable UI systems and accessibility-first components that lifted engagement <span style="color:oklch(0.92 0.004 160)">25%</span>.</span></li>
+              </ul>
+            </div>
+          </div>
+
+          <div data-reveal="1" data-delay="160" style="display:flex;flex-wrap:wrap;gap:clamp(20px,5vw,64px);padding:34px 0;border-top:1px solid oklch(0.24 0.008 160);border-bottom:1px solid oklch(0.24 0.008 160)">
+            <div style="flex:0 0 auto;min-width:200px;display:flex;flex-direction:column;gap:6px">
+              <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.6 0.012 160)">Jan 2024 — Aug 2024</span>
+              <span style="font-size:1.3rem;font-weight:600;letter-spacing:-0.01em">NEW EIC</span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:oklch(0.58 0.012 160)">Boston, MA</span>
+            </div>
+            <div style="flex:1 1 380px">
+              <p style="font-size:1.05rem;font-weight:500;margin-bottom:16px;color:oklch(0.92 0.004 160)">Software Engineer Intern</p>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:13px">
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Owned full-SDLC delivery of a React/Node/Python app serving <span style="color:oklch(0.92 0.004 160)">1K+ users</span>, turning ambiguous requirements into production features.</span></li>
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Expanded backend with <span style="color:oklch(0.92 0.004 160)">50+ API routes</span> plus lazy loading and MongoDB indexing — doubling query speed.</span></li>
+                <li style="display:flex;gap:12px;font-size:0.99rem;line-height:1.55;color:oklch(0.72 0.012 160)"><span style="color:oklch(0.87 0.21 140);font-family:'JetBrains Mono',monospace">→</span><span>Built secure Flask referral intake integrating with enrollment workflows, cutting onboarding time <span style="color:oklch(0.92 0.004 160)">30%</span>.</span></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div data-reveal="1" style="display:flex;flex-wrap:wrap;gap:24px;margin-top:34px">
+          <div style="flex:1 1 300px;display:flex;gap:14px;align-items:baseline">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.87 0.21 140)">EDU</span>
+            <div><div style="font-weight:500">M.S. Computer Science — Illinois Institute of Technology</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.58 0.012 160)">Chicago, IL · 2023–2025 · GPA 3.6</div></div>
+          </div>
+          <div style="flex:1 1 300px;display:flex;gap:14px;align-items:baseline">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.87 0.21 140)">EDU</span>
+            <div><div style="font-weight:500">B.Tech. Information Technology — CHARUSAT</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.58 0.012 160)">India · 2019–2023 · GPA 3.6</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" data-screen-label="Projects" style="scroll-margin-top:80px;padding:clamp(60px,9vh,120px) clamp(20px,5vw,72px)">
+      <div style="max-width:1200px;margin:0 auto">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:56px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.87 0.21 140);letter-spacing:0.04em">03 / Selected work</span>
+          <span style="flex:1;height:1px;background:oklch(0.26 0.008 160)"></span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(24px,3vw,36px)">
+
+          <a href="https://orbit-guardians.netlify.app" target="_blank" rel="noopener" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid oklch(0.26 0.008 160);border-radius:18px;overflow:hidden;background:oklch(0.175 0.007 160);transition:border-color .3s,transform .3s" style-hover="border-color:oklch(0.5 0.1 145);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:oklch(0.2 0.007 160)">
+              <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="shot-orbit" shape="rect" fit="cover" placeholder="orbit-guardians — screenshot" hint-size="100%,100%"></x-import>
+              <span style="position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 11px;border-radius:999px;background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150);font-weight:500;pointer-events:none">★ Hackathon Winner</span>
+            </div>
+            <div style="padding:26px 26px 30px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <h3 style="font-size:1.5rem;font-weight:600;letter-spacing:-0.02em">Orbit Guardians</h3>
+                <span style="font-family:'JetBrains Mono',monospace;color:oklch(0.87 0.21 140)">↗</span>
+              </div>
+              <p style="font-size:0.99rem;line-height:1.6;color:oklch(0.72 0.012 160)">Real-time, event-driven web app simulating threat-detection workflows with live user communication — a modular frontend and automated deploys, all built under a 48-hour constraint.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">React.js</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">Supabase</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">Express.js</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">Python</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/PastPort-AI-App" target="_blank" rel="noopener" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid oklch(0.26 0.008 160);border-radius:18px;overflow:hidden;background:oklch(0.175 0.007 160);transition:border-color .3s,transform .3s" style-hover="border-color:oklch(0.5 0.1 145);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:oklch(0.2 0.007 160)">
+              <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="shot-pastport" shape="rect" fit="cover" placeholder="pastport-ai — screenshot" hint-size="100%,100%"></x-import>
+              <span style="position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 11px;border-radius:999px;background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150);font-weight:500;pointer-events:none">★ Hackathon Winner</span>
+            </div>
+            <div style="padding:26px 26px 30px;display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+                <h3 style="font-size:1.5rem;font-weight:600;letter-spacing:-0.02em">PastPort AI</h3>
+                <span style="font-family:'JetBrains Mono',monospace;color:oklch(0.87 0.21 140)">↗</span>
+              </div>
+              <p style="font-size:0.99rem;line-height:1.6;color:oklch(0.72 0.012 160)">AI-powered conversational system on FastAPI + the OpenAI API with structured prompt handling, paired with a Flutter client delivering real-time responses and efficient local state.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">Flutter</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">OpenAI API</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">FastAPI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 10px;border-radius:7px;border:1px solid oklch(0.28 0.008 160);color:oklch(0.68 0.012 160)">Dart</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STACK -->
+    <section id="stack" data-screen-label="Stack" style="scroll-margin-top:80px;padding:clamp(60px,9vh,120px) clamp(20px,5vw,72px)">
+      <div style="max-width:1200px;margin:0 auto">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:56px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.87 0.21 140);letter-spacing:0.04em">04 / Stack</span>
+          <span style="flex:1;height:1px;background:oklch(0.26 0.008 160)"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(28px,4vw,56px)">
+          <div data-reveal="1">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.6 0.012 160);letter-spacing:0.04em;margin-bottom:18px">// LANGUAGES</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <span style="font-size:1.15rem;font-weight:500">Python</span>
+              <span style="font-size:1.15rem;font-weight:500">TypeScript</span>
+              <span style="font-size:1.15rem;font-weight:500">JavaScript</span>
+            </div>
+          </div>
+          <div data-reveal="1" data-delay="100">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.6 0.012 160);letter-spacing:0.04em;margin-bottom:18px">// FRAMEWORKS</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <span style="font-size:1.15rem;font-weight:500">Django</span>
+              <span style="font-size:1.15rem;font-weight:500">Flask · FastAPI</span>
+              <span style="font-size:1.15rem;font-weight:500">React · Next.js</span>
+              <span style="font-size:1.15rem;font-weight:500">Node.js</span>
+            </div>
+          </div>
+          <div data-reveal="1" data-delay="200">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.6 0.012 160);letter-spacing:0.04em;margin-bottom:18px">// CLOUD &amp; TOOLS</p>
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <span style="font-size:1.15rem;font-weight:500">AWS · Docker</span>
+              <span style="font-size:1.15rem;font-weight:500">PostgreSQL · MongoDB</span>
+              <span style="font-size:1.15rem;font-weight:500">CI/CD · PostHog</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div aria-hidden="true" style="margin-top:clamp(56px,8vh,96px);border-top:1px solid oklch(0.23 0.008 160);border-bottom:1px solid oklch(0.23 0.008 160);overflow:hidden;padding:22px 0;-webkit-mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent);mask-image:linear-gradient(90deg,transparent,black 12%,black 88%,transparent)">
+        <div style="display:flex;width:max-content;gap:52px;animation:vbmarquee 26s linear infinite;font-family:'JetBrains Mono',monospace;font-size:14px;color:oklch(0.5 0.012 160);white-space:nowrap">
+          <span>Python</span><span>·</span><span>Django</span><span>·</span><span>PostgreSQL</span><span>·</span><span>Docker</span><span>·</span><span>AWS</span><span>·</span><span>Next.js</span><span>·</span><span>React</span><span>·</span><span>FastAPI</span><span>·</span><span>OpenAI</span><span>·</span><span>Node.js</span><span>·</span><span>TypeScript</span><span>·</span><span>MongoDB</span><span>·</span><span>CI/CD</span><span>·</span>
+          <span>Python</span><span>·</span><span>Django</span><span>·</span><span>PostgreSQL</span><span>·</span><span>Docker</span><span>·</span><span>AWS</span><span>·</span><span>Next.js</span><span>·</span><span>React</span><span>·</span><span>FastAPI</span><span>·</span><span>OpenAI</span><span>·</span><span>Node.js</span><span>·</span><span>TypeScript</span><span>·</span><span>MongoDB</span><span>·</span><span>CI/CD</span><span>·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" data-screen-label="Contact" style="scroll-margin-top:80px;padding:clamp(90px,14vh,190px) clamp(20px,5vw,72px);position:relative">
+      <div aria-hidden="true" style="position:absolute;bottom:-10%;left:50%;width:min(760px,80vw);height:min(500px,60vw);border-radius:50%;background:radial-gradient(circle,oklch(0.87 0.21 140 / 0.12),transparent 65%);filter:blur(20px);transform:translateX(-50%);z-index:0"></div>
+      <div style="max-width:900px;margin:0 auto;position:relative;z-index:1;text-align:center">
+        <p data-reveal="1" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.87 0.21 140);letter-spacing:0.04em;margin-bottom:26px">05 / Contact</p>
+        <h2 data-reveal="1" data-delay="60" style="font-size:clamp(2.6rem,6.5vw,5rem);line-height:0.98;letter-spacing:-0.035em;font-weight:700;margin-bottom:30px">Let's build<br>something that ships.</h2>
+        <p data-reveal="1" data-delay="140" style="font-size:1.15rem;line-height:1.6;color:oklch(0.72 0.012 160);max-width:52ch;margin:0 auto 44px">Open to founding-engineer and early-stage roles. If you're building at the intersection of AI and product, let's talk.</p>
+        <div data-reveal="1" data-delay="220" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:52px">
+          <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px oklch(0.87 0.21 140 / 0.35)">
+            vijaybharvad0097@gmail.com
+          </a>
+        </div>
+        <div data-reveal="1" data-delay="300" style="display:flex;flex-wrap:wrap;gap:clamp(20px,4vw,44px);justify-content:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:oklch(0.66 0.012 160)">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px"><span style="color:oklch(0.87 0.21 140)">↗</span> LinkedIn</a>
+          <a href="tel:+15716042926" style="display:inline-flex;align-items:center;gap:8px"><span style="color:oklch(0.87 0.21 140)">☎</span> (571) 604-2926</a>
+          <span style="display:inline-flex;align-items:center;gap:8px"><span style="color:oklch(0.87 0.21 140)">◈</span> New York, USA</span>
+        </div>
+      </div>
+    </section>
+
+    <footer style="border-top:1px solid oklch(0.23 0.008 160);padding:32px clamp(20px,5vw,72px)">
+      <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:oklch(0.55 0.012 160)">
+        <div style="display:flex;align-items:center;gap:11px">
+          <span style="display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:oklch(0.87 0.21 140);color:oklch(0.17 0.03 150);font-weight:700;font-size:11px">VB</span>
+          <span>Vijay Bharvad</span>
+        </div>
+        <span>© 2026 · Built in NYC</span>
+      </div>
+    </footer>
+
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const root = document.getElementById('vb-root');
+    if (!root) return;
+    const fine = window.matchMedia('(pointer:fine)').matches;
+
+    // Nav scroll state
+    const nav = document.getElementById('vb-nav');
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        nav.style.background = 'oklch(0.15 0.006 160 / 0.82)';
+        nav.style.borderBottomColor = 'oklch(0.24 0.008 160)';
+        nav.style.backdropFilter = 'blur(14px)';
+        nav.style.webkitBackdropFilter = 'blur(14px)';
+      } else {
+        nav.style.background = 'transparent';
+        nav.style.borderBottomColor = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.webkitBackdropFilter = 'none';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Reveal on scroll
+    const revs = root.querySelectorAll('[data-reveal]');
+    revs.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1)';
+      el.style.willChange = 'opacity, transform';
+    });
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (e.isIntersecting) {
+          const d = parseInt(e.target.getAttribute('data-delay') || '0', 10);
+          setTimeout(() => {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'none';
+          }, d);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -7% 0px' });
+    revs.forEach(el => io.observe(el));
+
+    // Count-up
+    const counters = root.querySelectorAll('[data-count]');
+    const cio = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (e.isIntersecting) { this.animateCount(e.target); cio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    counters.forEach(el => cio.observe(el));
+
+    // Magnetic elements
+    if (fine) {
+      root.querySelectorAll('[data-magnetic]').forEach(el => {
+        el.style.transition = 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .3s, background .25s, border-color .25s, color .25s';
+        el.addEventListener('mousemove', (ev) => {
+          const r = el.getBoundingClientRect();
+          const mx = ev.clientX - (r.left + r.width / 2);
+          const my = ev.clientY - (r.top + r.height / 2);
+          el.style.transform = 'translate(' + (mx * 0.22) + 'px,' + (my * 0.34) + 'px)';
+        });
+        el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+      });
+    }
+
+    // Cursor glow ring
+    if (fine) {
+      const dot = document.createElement('div');
+      dot.style.cssText = 'position:fixed;top:0;left:0;width:26px;height:26px;border-radius:50%;border:1px solid oklch(0.87 0.21 140 / 0.55);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .22s,height .22s,background .22s;mix-blend-mode:screen';
+      document.body.appendChild(dot);
+      this._cursor = dot;
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      const move = (e) => { tx = e.clientX; ty = e.clientY; };
+      window.addEventListener('mousemove', move);
+      const loop = () => {
+        cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+        dot.style.left = cx + 'px'; dot.style.top = cy + 'px';
+        this._raf = requestAnimationFrame(loop);
+      };
+      loop();
+      root.querySelectorAll('a,button,[data-magnetic]').forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          dot.style.width = '48px'; dot.style.height = '48px';
+          dot.style.background = 'oklch(0.87 0.21 140 / 0.12)';
+        });
+        el.addEventListener('mouseleave', () => {
+          dot.style.width = '26px'; dot.style.height = '26px';
+          dot.style.background = 'transparent';
+        });
+      });
+    }
+
+    // Live eval console — subtle score jitter
+    const scoreEls = root.querySelectorAll('[data-score]');
+    this._iv = setInterval(() => {
+      scoreEls.forEach(el => {
+        const base = parseFloat(el.getAttribute('data-score'));
+        const isWarn = base < 0.5;
+        const jit = (Math.random() * 0.02 - 0.008);
+        let v = base + jit;
+        if (isWarn) v = Math.max(0.0, Math.min(0.06, v));
+        else v = Math.max(0.9, Math.min(0.999, v));
+        el.textContent = v.toFixed(2);
+      });
+    }, 1700);
+  }
+
+  animateCount(el) {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const dur = 1500;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * e).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString();
+    };
+    requestAnimationFrame(step);
+  }
+
+  componentWillUnmount() {
+    if (this._iv) clearInterval(this._iv);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._cursor && this._cursor.parentNode) this._cursor.parentNode.removeChild(this._cursor);
+  }
+
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="ext-resource-dependency" content="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js" data-resource-id="opentypeLib" />
+<meta name="ext-resource-dependency" content="https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff" data-resource-id="snakeFont" />
+<style>
+  :root{
+    color-scheme:dark;
+    --vb-bg:oklch(0.15 0.006 160);
+    --vb-nav-bg:oklch(0.15 0.006 160 / 0.82);
+    --vb-surface:oklch(0.175 0.007 160);
+    --vb-surface-2:oklch(0.2 0.007 160);
+    --vb-badge-bg:oklch(0.2 0.02 150 / 0.4);
+    --vb-badge-border:oklch(0.3 0.05 145);
+    --vb-badge-text:oklch(0.8 0.05 145);
+    --vb-text:oklch(0.97 0.004 160);
+    --vb-text-soft:oklch(0.88 0.004 160);
+    --vb-muted-1:oklch(0.7 0.012 160);
+    --vb-muted-2:oklch(0.66 0.012 160);
+    --vb-muted-3:oklch(0.6 0.012 160);
+    --vb-muted-4:oklch(0.52 0.012 160);
+    --vb-faint:oklch(0.35 0.008 160);
+    --vb-border-1:oklch(0.22 0.008 160);
+    --vb-border-2:oklch(0.25 0.008 160);
+    --vb-border-3:oklch(0.27 0.008 160);
+    --vb-hover-border:oklch(0.5 0.1 145);
+    --vb-hover-border-strong:oklch(0.55 0.12 145);
+    --vb-accent:oklch(0.87 0.21 140);
+    --vb-accent-fill:oklch(0.87 0.21 140);
+    --vb-on-accent:oklch(0.17 0.03 150);
+    --vb-btn2-border:oklch(0.4 0.07 145);
+    --vb-btn2-text:oklch(0.92 0.05 145);
+    --vb-snake-head:oklch(0.99 0.13 140);
+    --vb-snake-eye:oklch(0.2 0.03 150);
+    --vb-cursor-blend:screen;
+  }
+  :root[data-theme="light"]{
+    color-scheme:light;
+    --vb-bg:oklch(0.975 0.004 160);
+    --vb-nav-bg:oklch(0.975 0.004 160 / 0.85);
+    --vb-surface:oklch(0.995 0.002 160);
+    --vb-surface-2:oklch(0.94 0.006 160);
+    --vb-badge-bg:oklch(0.94 0.03 150 / 0.5);
+    --vb-badge-border:oklch(0.8 0.07 145);
+    --vb-badge-text:oklch(0.42 0.09 145);
+    --vb-text:oklch(0.18 0.01 160);
+    --vb-text-soft:oklch(0.28 0.01 160);
+    --vb-muted-1:oklch(0.42 0.012 160);
+    --vb-muted-2:oklch(0.46 0.012 160);
+    --vb-muted-3:oklch(0.5 0.012 160);
+    --vb-muted-4:oklch(0.56 0.012 160);
+    --vb-faint:oklch(0.75 0.008 160);
+    --vb-border-1:oklch(0.89 0.006 160);
+    --vb-border-2:oklch(0.87 0.006 160);
+    --vb-border-3:oklch(0.85 0.006 160);
+    --vb-hover-border:oklch(0.62 0.12 145);
+    --vb-hover-border-strong:oklch(0.55 0.12 145);
+    --vb-accent:oklch(0.53 0.16 145);
+    --vb-accent-fill:oklch(0.83 0.21 140);
+    --vb-on-accent:oklch(0.2 0.04 150);
+    --vb-btn2-border:oklch(0.72 0.09 145);
+    --vb-btn2-text:oklch(0.4 0.1 145);
+    --vb-snake-head:oklch(0.7 0.2 142);
+    --vb-snake-eye:oklch(0.98 0.01 150);
+    --vb-cursor-blend:multiply;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--vb-bg);color:var(--vb-text);font-family:'Space Grotesk',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .35s,color .35s}
+  a{color:inherit;text-decoration:none}
+  a:hover{color:var(--vb-accent)}
+  ::selection{background:var(--vb-accent-fill);color:var(--vb-on-accent)}
+  @keyframes vbpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+  @keyframes vbglow{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
+  @keyframes vbaccentglow{0%,100%{text-shadow:0 0 0px transparent}50%{text-shadow:0 0 22px color-mix(in oklab, var(--vb-accent-fill) 50%, transparent)}}
+  @keyframes vbnamesnake{0%{background-position:100% 0}100%{background-position:0% 0}}
+</style>
+</helmet>
+<div id="vb-root" style="position:relative">
+
+  <nav id="vb-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,5vw,72px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s">
+    <a href="#top" style="display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:-0.02em;font-size:15px">
+      <span style="display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-family:'JetBrains Mono',monospace;font-weight:500;font-size:13px">VB</span>
+      Vijay Bharvad
+    </a>
+    <div style="display:flex;align-items:center;gap:clamp(18px,3vw,36px)">
+      <a href="#work" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-2)">Work</a>
+      <a href="#about" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-2)">Experience</a>
+      <a href="#contact" data-magnetic="1" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</a>
+      <button id="vb-theme-btn" type="button" aria-label="Toggle light / dark mode" style="display:grid;place-items:center;width:34px;height:34px;border-radius:10px;border:1px solid var(--vb-border-2);background:var(--vb-surface);color:var(--vb-text);cursor:pointer;font-size:15px;line-height:1;transition:border-color .3s,transform .2s" style-hover="border-color:var(--vb-hover-border);transform:scale(1.08)">☀</button>
+    </div>
+  </nav>
+
+  <main style="position:relative;z-index:1">
+
+    <!-- HERO -->
+    <section id="top" data-screen-label="Hero" style="min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px clamp(20px,5vw,72px) 80px;position:relative;overflow:hidden">
+      <div aria-hidden="true" style="position:absolute;top:22%;left:56%;width:min(720px,74vw);height:min(720px,74vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 16%, transparent),transparent 60%);filter:blur(30px);animation:vbglow 9s ease-in-out infinite;z-index:0"></div>
+      <div style="max-width:1080px;margin:0 auto;width:100%;position:relative;z-index:1">
+        <div data-reveal="1" style="display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;border:1px solid var(--vb-badge-border);background:var(--vb-badge-bg);margin-bottom:clamp(22px,3vh,36px)">
+          <span style="width:8px;height:8px;border-radius:50%;background:var(--vb-accent-fill);animation:vbpulse 1.8s ease-in-out infinite;box-shadow:0 0 12px var(--vb-accent-fill)"></span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-badge-text)">Available for founding roles</span>
+        </div>
+        <div data-reveal="1" data-delay="80" style="display:block;margin-bottom:clamp(26px,4vh,38px)">
+          <div id="vb-name-wrap" style="position:relative;display:inline-block;padding:clamp(14px,2vw,26px) clamp(24px,3vw,46px);margin-left:calc(-1 * clamp(24px,3vw,46px))">
+            <h1 id="vb-name" data-snake="words2" style="font-size:clamp(3.4rem,13vw,9rem);line-height:0.82;letter-spacing:-0.045em;font-weight:700;position:relative;z-index:1">Vijay<br>Bharvad</h1>
+          </div>
+        </div>
+        <p data-reveal="1" data-delay="160" style="font-size:clamp(1.15rem,2.4vw,1.8rem);line-height:1.3;letter-spacing:-0.02em;font-weight:500;max-width:22ch;color:var(--vb-text-soft)">Software engineer building <span style="color:var(--vb-accent);animation:vbaccentglow 3.6s ease-in-out infinite">AI systems</span> that ship to production.</p>
+        <div data-reveal="1" data-delay="260" style="display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:clamp(32px,4vh,48px)">
+          <a href="#work" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">View work <span style="font-family:'JetBrains Mono',monospace">↗</span></a>
+          <a href="./Vijay_CV_2026.pdf" target="_blank" rel="noopener" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;border:1px solid var(--vb-btn2-border);background:var(--vb-badge-bg);color:var(--vb-btn2-text);font-weight:600;font-size:15px;transition:border-color .3s,box-shadow .3s,background .3s" style-hover="border-color:var(--vb-accent);box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 20%, transparent)">View resume <span style="font-family:'JetBrains Mono',monospace">↓</span></a>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">Software Engineer · Halluminate <span style="color:var(--vb-accent)">(YC S25)</span> · NYC</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS (quiet) -->
+    <section data-screen-label="Stats" style="border-top:1px solid var(--vb-border-1);border-bottom:1px solid var(--vb-border-1)">
+      <div style="max-width:1080px;margin:0 auto;padding:clamp(36px,5vw,56px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:32px">
+        <div data-reveal="1" style="display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="5">5</span><span style="color:var(--vb-accent)">K+</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">users supported</div>
+        </div>
+        <div data-reveal="1" data-delay="80" style="display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="2">2</span><span style="color:var(--vb-accent)">×</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">faster loads</div>
+        </div>
+        <div data-reveal="1" data-delay="160" style="display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="50">50</span><span style="color:var(--vb-accent)">%</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">lower latency</div>
+        </div>
+        <div data-reveal="1" data-delay="240" style="display:flex;flex-direction:column;gap:7px">
+          <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="25">25</span><span style="color:var(--vb-accent)">%</span></div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">engagement growth</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATEMENT -->
+    <section style="padding:clamp(100px,16vh,200px) clamp(20px,5vw,72px)">
+      <div style="max-width:1080px;margin:0 auto">
+        <p data-reveal="1" style="font-size:clamp(1.8rem,4.4vw,3.4rem);line-height:1.22;letter-spacing:-0.025em;font-weight:500;max-width:20ch">I work where <span style="color:var(--vb-accent);animation:vbaccentglow 4.2s ease-in-out infinite">AI meets production reality</span> — LLM evaluation, event-driven systems, and APIs that hold up under real load.</p>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work" data-screen-label="Projects" style="scroll-margin-top:80px;padding:0 clamp(20px,5vw,72px) clamp(60px,9vh,120px)">
+      <div style="max-width:1080px;margin:0 auto">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:48px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Selected work</span>
+          <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,2.5vw,32px)">
+
+          <a href="https://orbit-guardians.netlify.app" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-orbit" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-orbit)"/>
+                  <ellipse cx="200" cy="110" rx="150" ry="58" transform="rotate(-16 200 110)" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <ellipse cx="200" cy="110" rx="104" ry="40" transform="rotate(-16 200 110)" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <ellipse cx="200" cy="110" rx="58" ry="22" transform="rotate(-16 200 110)" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <circle cx="200" cy="110" r="15" style="fill:var(--vb-accent-fill)"/>
+                  <circle cx="296" cy="83" r="7" style="fill:var(--vb-accent)"/>
+                  <circle cx="118" cy="146" r="4.5" style="fill:var(--vb-muted-3)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">01 — ORBIT GUARDIANS</text>
+                </svg>
+              </div>
+              <span style="position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 11px;border-radius:999px;background:var(--vb-accent-fill);color:var(--vb-on-accent);pointer-events:none">★ Hackathon Winner</span>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Orbit Guardians</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Real-time threat-detection app with live comms — built in 48 hours.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Supabase</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Express</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://www.youtube.com/watch?v=cB5GCnFQf-o" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-pastport" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-pastport)"/>
+                  <rect x="66" y="56" width="130" height="56" rx="13" style="fill:var(--vb-surface);stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <rect x="82" y="74" width="86" height="7" rx="3.5" style="fill:var(--vb-muted-3)"/>
+                  <rect x="82" y="89" width="58" height="7" rx="3.5" style="fill:var(--vb-border-3)"/>
+                  <rect x="204" y="118" width="130" height="56" rx="13" style="fill:none;stroke:var(--vb-accent);stroke-width:1.5"/>
+                  <rect x="220" y="136" width="86" height="7" rx="3.5" style="fill:var(--vb-accent)"/>
+                  <rect x="220" y="151" width="46" height="7" rx="3.5" style="fill:var(--vb-accent);opacity:.5"/>
+                  <circle cx="322" cy="66" r="17" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M322 56v10l7 5" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5;stroke-linecap:round"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">02 — PASTPORT AI</text>
+                </svg>
+              </div>
+              <span style="position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 11px;border-radius:999px;background:var(--vb-accent-fill);color:var(--vb-on-accent);pointer-events:none">★ Hackathon Winner</span>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">PastPort AI</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Conversational AI on FastAPI + OpenAI with a real-time Flutter client.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Flutter</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">FastAPI</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://after-image-brown.vercel.app" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-afterimage" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-afterimage)"/>
+                  <rect x="132" y="44" width="124" height="152" rx="10" style="fill:var(--vb-surface);stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <rect x="148" y="66" width="92" height="8" rx="4" style="fill:var(--vb-border-3)"/>
+                  <rect x="148" y="84" width="92" height="8" rx="4" style="fill:var(--vb-border-3)"/>
+                  <rect x="148" y="102" width="72" height="8" rx="4" style="fill:var(--vb-accent)"/>
+                  <rect x="148" y="120" width="92" height="8" rx="4" style="fill:var(--vb-border-3)"/>
+                  <rect x="148" y="138" width="52" height="8" rx="4" style="fill:var(--vb-border-3)"/>
+                  <circle cx="272" cy="158" r="20" style="fill:none;stroke:var(--vb-accent);stroke-width:2.5"/>
+                  <path d="M287 173l16 16" style="stroke:var(--vb-accent);stroke-width:2.5;stroke-linecap:round"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">03 — AFTERIMAGE</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">AfterImage</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">PDF Q&amp;A — ask questions and get answers with the evidence highlighted right in the document.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">FastAPI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/vijay0772/SlackBot/tree/main/slack-ai-bot" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-slackbot" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-slackbot)"/>
+                  <ellipse cx="118" cy="72" rx="40" ry="13" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M78 72v70M158 72v70" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M78 107a40 13 0 0 0 80 0M78 142a40 13 0 0 0 80 0" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M166 108h50" style="stroke:var(--vb-accent);stroke-width:2;stroke-dasharray:6 6;stroke-linecap:round"/>
+                  <rect x="222" y="80" width="122" height="56" rx="13" style="fill:none;stroke:var(--vb-accent);stroke-width:1.5"/>
+                  <text x="238" y="114" style="font-family:'JetBrains Mono',monospace;font-size:16px;fill:var(--vb-accent)">SQL&gt;_</text>
+                  <path d="M244 136l-8 14h20Z" style="fill:var(--vb-surface);stroke:var(--vb-accent);stroke-width:1.5"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">04 — SLACK SQL BOT</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Slack SQL Bot</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Slack bot that turns natural-language questions into SQL via an agent loop, with thread memory.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">LangGraph</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">SQLite</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://stitchfinn-atbb.vercel.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-stitchfin" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-stitchfin)"/>
+                  <circle cx="90" cy="70" r="9" style="fill:none;stroke:var(--vb-muted-3);stroke-width:2"/>
+                  <circle cx="90" cy="160" r="9" style="fill:none;stroke:var(--vb-muted-3);stroke-width:2"/>
+                  <circle cx="310" cy="70" r="9" style="fill:none;stroke:var(--vb-border-3);stroke-width:2"/>
+                  <circle cx="310" cy="160" r="9" style="fill:none;stroke:var(--vb-border-3);stroke-width:2"/>
+                  <path d="M99 74 186 110M99 156 186 120" style="stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M214 110 301 74M214 120 301 156" style="stroke:var(--vb-accent);stroke-width:1.5;stroke-dasharray:6 6"/>
+                  <circle cx="200" cy="115" r="16" style="fill:var(--vb-accent-fill)"/>
+                  <circle cx="200" cy="115" r="6" style="fill:var(--vb-on-accent)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">05 — STITCHFIN</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">StitchFin Agent Gateway</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Multi-tenant AI agent gateway — text and voice chat with retries, provider fallback, and cost analytics.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">FastAPI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">PostgreSQL</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://v-pharma.vercel.app" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-vpharma" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-vpharma)"/>
+                  <rect x="76" y="86" width="92" height="38" rx="19" transform="rotate(-28 122 105)" style="fill:none;stroke:var(--vb-accent);stroke-width:2"/>
+                  <path d="M100 122 141 100" style="stroke:var(--vb-accent);stroke-width:2"/>
+                  <circle cx="146" cy="88" r="4" style="fill:var(--vb-accent-fill)"/>
+                  <path d="M196 170V64M196 170h140" style="stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <path d="M208 148l32-26 28 12 34-42 22 10" style="fill:none;stroke:var(--vb-accent);stroke-width:2;stroke-linecap:round;stroke-linejoin:round"/>
+                  <circle cx="240" cy="122" r="4.5" style="fill:var(--vb-accent-fill)"/>
+                  <circle cx="302" cy="92" r="4.5" style="fill:var(--vb-accent-fill)"/>
+                  <path d="M330 52h20M340 42v20" style="stroke:var(--vb-muted-3);stroke-width:2.5;stroke-linecap:round"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">06 — V-PHARMA INTEL</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">V-Pharma Intel</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Clinical-trial and FDA-approval analytics — Python ETL pipelines plus a chat that turns questions into queries.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Next.js</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Supabase</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/vijay0772/v-projectt" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-itb" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-itb)"/>
+                  <rect x="70" y="56" width="96" height="124" rx="8" style="fill:var(--vb-surface);stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M84 80h68M84 98h68M84 116h48M84 134h68M84 152h38" style="stroke:var(--vb-border-3);stroke-width:5;stroke-linecap:round"/>
+                  <rect x="70" y="102" width="96" height="7" style="fill:var(--vb-accent-fill);opacity:.55"/>
+                  <path d="M180 118h44" style="stroke:var(--vb-accent);stroke-width:2;stroke-dasharray:6 6;stroke-linecap:round"/>
+                  <path d="M224 118l-8-6v12Z" transform="rotate(180 224 118)" style="fill:var(--vb-accent)"/>
+                  <rect x="238" y="70" width="96" height="96" rx="8" style="fill:none;stroke:var(--vb-accent);stroke-width:1.5"/>
+                  <path d="M238 102h96M238 134h96M286 70v96" style="stroke:var(--vb-accent);stroke-width:1;opacity:.7"/>
+                  <rect x="246" y="80" width="30" height="12" rx="3" style="fill:var(--vb-accent-fill)"/>
+                  <rect x="294" y="112" width="30" height="12" rx="3" style="fill:var(--vb-border-3)"/>
+                  <rect x="246" y="144" width="30" height="12" rx="3" style="fill:var(--vb-border-3)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">07 — ITB AUTOMATION</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Proposal → ITB Automation</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Ingests PDF and Excel proposals with an OCR fallback chain, structures them via LLM, and scores per-field confidence.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">FastAPI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Supabase</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://quick-serve-phi.vercel.app/home" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-quickserve" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-quickserve)"/>
+                  <circle cx="96" cy="164" r="28" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <circle cx="96" cy="164" r="16" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <path d="M124 152C180 84 236 176 302 96" style="fill:none;stroke:var(--vb-accent);stroke-width:2;stroke-dasharray:7 7;stroke-linecap:round"/>
+                  <circle cx="308" cy="90" r="11" style="fill:var(--vb-accent-fill)"/>
+                  <circle cx="308" cy="90" r="4" style="fill:var(--vb-on-accent)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">08 — QUICKSERVE</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">QuickServe</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">End-to-end food delivery — ordering, live tracking, and restaurant management across four user roles.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">REST API</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://school-blogging-platformm-awf9.vercel.app/login" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-schoolblog" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-schoolblog)"/>
+                  <rect x="70" y="58" width="180" height="10" rx="5" style="fill:var(--vb-muted-3)"/>
+                  <rect x="70" y="82" width="260" height="10" rx="5" style="fill:var(--vb-border-3)"/>
+                  <rect x="70" y="106" width="230" height="10" rx="5" style="fill:var(--vb-border-3)"/>
+                  <rect x="70" y="130" width="150" height="10" rx="5" style="fill:var(--vb-accent)"/>
+                  <rect x="228" y="128" width="4" height="14" style="fill:var(--vb-accent)"/>
+                  <rect x="70" y="154" width="200" height="10" rx="5" style="fill:var(--vb-border-3)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">09 — SCHOOL BLOGGING</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">School Blogging Platform</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Role-based academic blogging with an AI chatbot, smart search, and live weather insights.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Elasticsearch</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">MongoDB</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/vijay0772/SmartHomes" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-smarthomes" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-smarthomes)"/>
+                  <path d="M200 62 268 116v66H132v-66Z" style="fill:none;stroke:var(--vb-accent);stroke-width:2;stroke-linejoin:round"/>
+                  <rect x="184" y="142" width="32" height="40" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M186 48a26 26 0 0 1 28 0" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5;stroke-linecap:round"/>
+                  <path d="M180 36a38 38 0 0 1 40 0" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5;stroke-linecap:round"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">10 — SMARTHOMES</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">SmartHomes</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Smart-home e-commerce with reviews, role management, and a retailer analytics dashboard.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Java</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://github.com/vijay0772/Craftsman" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-craftsman" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-craftsman)"/>
+                  <circle cx="200" cy="112" r="36" style="fill:none;stroke:var(--vb-accent);stroke-width:9;stroke-dasharray:11 8"/>
+                  <circle cx="200" cy="112" r="13" style="fill:var(--vb-accent-fill)"/>
+                  <rect x="252" y="106" width="72" height="12" rx="6" transform="rotate(32 288 112)" style="fill:var(--vb-muted-3)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">11 — CRAFTSMAN</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">CraftsMan (Home Hub)</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Tool shopping and home-maintenance scheduling with a location-based service finder.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">JavaScript</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Java</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://quickquiz-for-you.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-quickquizz" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-quickquizz)"/>
+                  <text x="120" y="158" style="font-family:'JetBrains Mono',monospace;font-size:104px;font-weight:700;fill:var(--vb-accent)">?</text>
+                  <rect x="212" y="66" width="120" height="24" rx="8" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <rect x="212" y="102" width="120" height="24" rx="8" style="fill:none;stroke:var(--vb-accent);stroke-width:1.5"/>
+                  <circle cx="228" cy="114" r="5" style="fill:var(--vb-accent-fill)"/>
+                  <rect x="212" y="138" width="120" height="24" rx="8" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">12 — QUICKQUIZZ</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Quickquizz</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Category-based quiz platform with questions fetched dynamically over a REST API.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Next.js</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">REST API</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://sarjaniindustries.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-sarjani" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-sarjani)"/>
+                  <path d="M150 60v110M162 60v110" style="stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M238 60v110M250 60v110" style="stroke:var(--vb-muted-3);stroke-width:1.5"/>
+                  <path d="M96 80h44M96 115h44M96 150h44" style="stroke:var(--vb-border-3);stroke-width:6;stroke-linecap:round"/>
+                  <path d="M260 80h44M260 115h44M260 150h44" style="stroke:var(--vb-border-3);stroke-width:6;stroke-linecap:round"/>
+                  <path d="M176 70l24 18-24 18 24 18-24 18 24 18" style="fill:none;stroke:var(--vb-accent);stroke-width:2;stroke-linejoin:round"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">13 — SARJANI INDUSTRIES</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Sarjani Industries</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">E-commerce front-end for a transformer-components manufacturer.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">HTML</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">SCSS</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://marwiz.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-marwiz" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-marwiz)"/>
+                  <path d="M92 108 188 70v84L92 116Z" style="fill:none;stroke:var(--vb-accent);stroke-width:2;stroke-linejoin:round"/>
+                  <rect x="76" y="102" width="18" height="22" rx="4" style="fill:var(--vb-accent-fill)"/>
+                  <path d="M206 84a44 44 0 0 1 0 44" style="fill:none;stroke:var(--vb-muted-3);stroke-width:1.5;stroke-linecap:round"/>
+                  <path d="M218 70a64 64 0 0 1 0 72" style="fill:none;stroke:var(--vb-border-3);stroke-width:1.5;stroke-linecap:round"/>
+                  <rect x="262" y="128" width="16" height="44" rx="4" style="fill:var(--vb-border-3)"/>
+                  <rect x="288" y="104" width="16" height="68" rx="4" style="fill:var(--vb-muted-3)"/>
+                  <rect x="314" y="76" width="16" height="96" rx="4" style="fill:var(--vb-accent)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">14 — MARWIZ</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Marwiz</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">E-commerce site for a digital advertising company's service catalog.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">HTML</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">CSS</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://digimapp.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+            <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
+              <div data-cover="1" style="position:absolute;inset:0">
+                <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
+                  <defs><pattern id="gd-digimap" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.1" style="fill:var(--vb-border-3)"/></pattern></defs>
+                  <rect width="400" height="250" style="fill:var(--vb-surface-2)"/>
+                  <rect width="400" height="250" style="fill:url(#gd-digimap)"/>
+                  <path d="M60 190C120 120 180 210 240 120s70-52 100-64" style="fill:none;stroke:var(--vb-accent);stroke-width:2;stroke-dasharray:8 8;stroke-linecap:round"/>
+                  <circle cx="98" cy="146" r="9" style="fill:none;stroke:var(--vb-muted-3);stroke-width:2"/>
+                  <circle cx="238" cy="122" r="9" style="fill:none;stroke:var(--vb-muted-3);stroke-width:2"/>
+                  <circle cx="336" cy="58" r="11" style="fill:var(--vb-accent-fill)"/>
+                  <circle cx="336" cy="58" r="4" style="fill:var(--vb-on-accent)"/>
+                  <text x="24" y="228" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;fill:var(--vb-muted-3)">15 — DIGIMAP</text>
+                </svg>
+              </div>
+            </div>
+            <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">DigiMap</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Marketing-services e-commerce site for a digital marketing agency.</p>
+              <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">HTML</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">CSS</span>
+                <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">JavaScript</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE (compact) -->
+    <section id="about" data-screen-label="Experience" style="scroll-margin-top:80px;padding:clamp(60px,9vh,120px) clamp(20px,5vw,72px)">
+      <div style="max-width:1080px;margin:0 auto">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Experience</span>
+          <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
+        </div>
+
+        <a href="#work" data-reveal="1" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
+          <span style="flex:1 1 220px;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.02em">Halluminate <span style="font-family:'JetBrains Mono',monospace;font-size:0.6em;font-weight:400;color:var(--vb-accent);vertical-align:middle">YC S25</span></span>
+          <span style="flex:1 1 200px;color:var(--vb-muted-1)">Software Engineer · LLM evaluation APIs</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">2025 — Now</span>
+        </a>
+        <div data-reveal="1" data-delay="80" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
+          <span style="flex:1 1 220px;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.02em">Find Me LLC</span>
+          <span style="flex:1 1 200px;color:var(--vb-muted-1)">Full-Stack Developer · Next.js / AWS platform</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">2024 — 25</span>
+        </div>
+        <div data-reveal="1" data-delay="160" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
+          <span style="flex:1 1 220px;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.02em">NEW EIC</span>
+          <span style="flex:1 1 200px;color:var(--vb-muted-1)">SWE Intern · React / Node / Python · 1K+ users</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">2024</span>
+        </div>
+
+        <div data-reveal="1" data-delay="120" style="display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:34px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">
+          <span><span style="color:var(--vb-accent)">EDU</span> M.S. CS, Illinois Tech · 2025</span>
+          <span style="color:var(--vb-faint)">/</span>
+          <span>Python · TypeScript · Django · React · AWS · Docker · PostgreSQL</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" data-screen-label="Contact" style="scroll-margin-top:80px;padding:clamp(90px,15vh,200px) clamp(20px,5vw,72px);position:relative">
+      <div aria-hidden="true" style="position:absolute;bottom:-10%;left:50%;width:min(700px,80vw);height:min(460px,60vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 11%, transparent),transparent 65%);filter:blur(20px);transform:translateX(-50%);z-index:0"></div>
+      <div style="max-width:1080px;margin:0 auto;position:relative;z-index:1">
+        <h2 data-reveal="1" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
+        <div data-reveal="1" data-delay="100" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
+          <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
+          <a href="https://www.linkedin.com/in/vijay-bharvad-a44085210/" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> LinkedIn</a>
+          <a href="tel:+15716042926" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">☎</span> (571) 604-2926</a>
+        </div>
+      </div>
+    </section>
+
+    <footer style="border-top:1px solid var(--vb-border-1);padding:30px clamp(20px,5vw,72px)">
+      <div style="max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-4)">
+        <span>Vijay Bharvad</span>
+        <span>© 2026 · Built in NYC</span>
+      </div>
+    </footer>
+
+  </main>
+</div>
+
+<template id="__bundler_thumbnail" data-bg-color="#101512">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#101512"/>
+    <text x="600" y="500" font-family="monospace" font-size="360" font-weight="700" fill="#7CFF9B" text-anchor="middle" letter-spacing="-20">VB</text>
+  </svg>
+</template></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const root = document.getElementById('vb-root');
+    if (!root) return;
+    const fine = window.matchMedia('(pointer:fine)').matches;
+
+    const themeBtn = document.getElementById('vb-theme-btn');
+    const applyTheme = (t) => {
+      document.documentElement.setAttribute('data-theme', t);
+      if (themeBtn) themeBtn.textContent = t === 'light' ? '☾' : '☀';
+    };
+    let theme = 'dark';
+    try { theme = localStorage.getItem('vb-theme') || 'dark'; } catch (e) {}
+    applyTheme(theme);
+    if (themeBtn) themeBtn.addEventListener('click', () => {
+      theme = theme === 'light' ? 'dark' : 'light';
+      applyTheme(theme);
+      try { localStorage.setItem('vb-theme', theme); } catch (e) {}
+    });
+
+    const nav = document.getElementById('vb-nav');
+    // scroll progress: a life-like snake crawls around the whole viewport border.
+    // Follow-the-leader chain (simple IK): each segment keeps a fixed distance
+    // from the one ahead, which produces organic slithering around corners.
+    const cv = document.createElement('canvas');
+    cv.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;z-index:101;pointer-events:none';
+    document.body.appendChild(cv);
+    this._bar = cv;
+    const bctx = cv.getContext('2d');
+    const SEGS = 46, SPACING = 7, MARGIN = 11;
+    const pts = [];
+    for (let i = 0; i < SEGS; i++) pts.push({ x: MARGIN + 40 - i * SPACING, y: MARGIN });
+    let barTarget = 0, headD = 0, btick = 0, mx = -9999, my = -9999;
+    let colAccent = 'oklch(0.87 0.21 140)', colFill = colAccent;
+
+    const headImgEl = new Image();
+    headImgEl.src = './snake.png';
+    let headSprite = null;
+    const buildHeadSprite = () => {
+      if (!headImgEl.complete || !headImgEl.naturalWidth) return;
+      // tint the black artwork green but keep the white eyes
+      const s = document.createElement('canvas'); s.width = s.height = 64;
+      const c2 = s.getContext('2d');
+      c2.drawImage(headImgEl, 0, 0, 64, 64);
+      c2.globalCompositeOperation = 'source-in';
+      c2.fillStyle = colAccent; c2.fillRect(0, 0, 64, 64);
+      c2.globalCompositeOperation = 'screen';
+      c2.drawImage(headImgEl, 0, 0, 64, 64);
+      headSprite = s;
+    };
+    headImgEl.onload = buildHeadSprite;
+    const resolveColors = () => {
+      const cs = getComputedStyle(document.documentElement);
+      colAccent = (cs.getPropertyValue('--vb-accent') || '').trim() || colAccent;
+      colFill = (cs.getPropertyValue('--vb-accent-fill') || '').trim() || colFill;
+      buildHeadSprite();
+    };
+    resolveColors();
+
+    this._onBarMouse = (e) => { mx = e.clientX; my = e.clientY; };
+    document.addEventListener('mousemove', this._onBarMouse);
+    this._onBarClick = (e) => {
+      if (Math.hypot(e.clientX - pts[0].x, e.clientY - pts[0].y) < 26)
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    document.addEventListener('click', this._onBarClick);
+
+    // point at distance d along the border loop: top -> right -> bottom -> left
+    const periPoint = (d, W, H) => {
+      const w = W - MARGIN * 2, h = H - MARGIN * 2, total = 2 * (w + h);
+      d = ((d % total) + total) % total;
+      if (d < w) return { x: MARGIN + d, y: MARGIN, a: 0 };
+      d -= w;
+      if (d < h) return { x: MARGIN + w, y: MARGIN + d, a: Math.PI / 2 };
+      d -= h;
+      if (d < w) return { x: MARGIN + w - d, y: MARGIN + h, a: Math.PI };
+      d -= w;
+      return { x: MARGIN, y: MARGIN + h - d, a: -Math.PI / 2 };
+    };
+
+    const barTick = () => {
+      btick++;
+      if (btick % 45 === 0) resolveColors(); // stay in sync with theme toggle
+      const W = window.innerWidth, H = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
+        cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      }
+      bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      bctx.clearRect(0, 0, W, H);
+      const total = 2 * (W - MARGIN * 2) + 2 * (H - MARGIN * 2);
+
+      const targetD = barTarget * (total - 2);
+      headD += (targetD - headD) * 0.06;
+      const moving = Math.abs(targetD - headD) > 1.5;
+
+      // head seeks a point on the loop, offset by a slither wave
+      const p = periPoint(headD, W, H);
+      const amp = moving ? 5 : 1.6;
+      const off = Math.sin(btick * 0.12 + headD * 0.045) * amp;
+      const tx = p.x + Math.cos(p.a + Math.PI / 2) * off;
+      const ty = p.y + Math.sin(p.a + Math.PI / 2) * off;
+      pts[0].x += (tx - pts[0].x) * 0.35;
+      pts[0].y += (ty - pts[0].y) * 0.35;
+
+      // body follows, and shies away from the mouse
+      for (let i = 1; i < SEGS; i++) {
+        const dx = pts[i].x - pts[i - 1].x, dy = pts[i].y - pts[i - 1].y;
+        const dl = Math.hypot(dx, dy) || 1;
+        let nx = pts[i - 1].x + (dx / dl) * SPACING;
+        let ny = pts[i - 1].y + (dy / dl) * SPACING;
+        const mdx = nx - mx, mdy = ny - my, md = Math.hypot(mdx, mdy);
+        if (md < 70 && md > 0.01) {
+          const push = (70 - md) * 0.25;
+          nx += (mdx / md) * push; ny += (mdy / md) * push;
+        }
+        pts[i].x += (nx - pts[i].x) * 0.6;
+        pts[i].y += (ny - pts[i].y) * 0.6;
+      }
+
+      // faint trail over the part of the border already covered
+      bctx.strokeStyle = colFill;
+      bctx.globalAlpha = 0.2;
+      bctx.lineWidth = 2;
+      bctx.beginPath();
+      bctx.moveTo(MARGIN, MARGIN);
+      for (let d = 12; d <= headD; d += 12) { const q = periPoint(d, W, H); bctx.lineTo(q.x, q.y); }
+      bctx.stroke();
+      bctx.globalAlpha = 1;
+
+      // tapered body
+      bctx.fillStyle = colFill;
+      for (let i = SEGS - 1; i >= 1; i--) {
+        const t = i / (SEGS - 1);
+        bctx.globalAlpha = 1 - t * 0.65;
+        bctx.beginPath();
+        bctx.arc(pts[i].x, pts[i].y, 6.5 * (1 - t * 0.75), 0, Math.PI * 2);
+        bctx.fill();
+      }
+      bctx.globalAlpha = 1;
+
+      // head image, rotated to the direction of travel, with a flicking tongue
+      const ang = Math.atan2(pts[0].y - pts[1].y, pts[0].x - pts[1].x);
+      bctx.save();
+      bctx.translate(pts[0].x, pts[0].y);
+      bctx.rotate(ang + Math.PI / 2);
+      const tphase = btick % 170;
+      if (tphase < 20) {
+        const ext = Math.sin((tphase / 20) * Math.PI) * 9;
+        bctx.strokeStyle = colAccent; bctx.lineWidth = 1.6; bctx.lineCap = 'round';
+        bctx.beginPath();
+        bctx.moveTo(0, -12); bctx.lineTo(0, -12 - ext);
+        bctx.moveTo(0, -12 - ext); bctx.lineTo(-3, -16 - ext);
+        bctx.moveTo(0, -12 - ext); bctx.lineTo(3, -16 - ext);
+        bctx.stroke();
+      }
+      bctx.shadowColor = colFill; bctx.shadowBlur = 10;
+      if (headSprite) bctx.drawImage(headSprite, -14, -14, 28, 28);
+      else { bctx.fillStyle = colFill; bctx.beginPath(); bctx.arc(0, 0, 8, 0, Math.PI * 2); bctx.fill(); }
+      bctx.restore();
+
+      // scroll % near the head when the mouse comes close
+      if (Math.hypot(mx - pts[0].x, my - pts[0].y) < 60) {
+        bctx.font = "11px 'JetBrains Mono',monospace";
+        bctx.fillStyle = colAccent;
+        bctx.textAlign = 'center';
+        const lx = Math.min(W - 34, Math.max(34, pts[0].x));
+        const ly = Math.min(H - 14, Math.max(24, pts[0].y + (pts[0].y < H / 2 ? 34 : -26)));
+        bctx.fillText(Math.round(barTarget * 100) + '%', lx, ly);
+      }
+      this._barRaf = requestAnimationFrame(barTick);
+    };
+    this._barRaf = requestAnimationFrame(barTick);
+
+    const onScroll = () => {
+      const sc = document.documentElement.scrollHeight - window.innerHeight;
+      barTarget = sc > 0 ? Math.min(1, window.scrollY / sc) : 0;
+      if (window.scrollY > 40) {
+        nav.style.background = 'var(--vb-nav-bg)';
+        nav.style.borderBottomColor = 'var(--vb-border-1)';
+        nav.style.backdropFilter = 'blur(14px)';
+        nav.style.webkitBackdropFilter = 'blur(14px)';
+      } else {
+        nav.style.background = 'transparent';
+        nav.style.borderBottomColor = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.webkitBackdropFilter = 'none';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    const revs = root.querySelectorAll('[data-reveal]');
+    revs.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1)';
+      el.style.willChange = 'opacity, transform';
+    });
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (e.isIntersecting) {
+          const d = parseInt(e.target.getAttribute('data-delay') || '0', 10);
+          setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'none'; }, d);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -7% 0px' });
+    revs.forEach(el => io.observe(el));
+
+    const counters = root.querySelectorAll('[data-count]');
+    const cio = new IntersectionObserver((ents) => {
+      ents.forEach(e => { if (e.isIntersecting) { this.animateCount(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach(el => cio.observe(el));
+
+    if (fine) {
+      root.querySelectorAll('[data-magnetic]').forEach(el => {
+        el.style.transition = 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .3s, background .25s, color .25s';
+        el.addEventListener('mousemove', (ev) => {
+          const r = el.getBoundingClientRect();
+          const mx = ev.clientX - (r.left + r.width / 2);
+          const my = ev.clientY - (r.top + r.height / 2);
+          el.style.transform = 'translate(' + (mx * 0.2) + 'px,' + (my * 0.32) + 'px)';
+        });
+        el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+      });
+
+      const dot = document.createElement('div');
+      const snakeMask = "url('./icons8-year-of-snake-16.png') center / contain no-repeat";
+      dot.style.cssText = 'position:fixed;top:0;left:0;width:26px;height:26px;background:var(--vb-accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .22s,height .22s,background .22s;-webkit-mask:' + snakeMask + ';mask:' + snakeMask + ';filter:drop-shadow(0 0 8px color-mix(in oklab, var(--vb-accent-fill) 60%, transparent))';
+      document.body.appendChild(dot);
+      this._cursor = dot;
+      let tx = 0, ty = 0, cx = 0, cy = 0;
+      window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
+      const loop = () => {
+        cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+        dot.style.left = cx + 'px'; dot.style.top = cy + 'px';
+        this._raf = requestAnimationFrame(loop);
+      };
+      loop();
+      root.querySelectorAll('a,[data-magnetic]').forEach(el => {
+        el.addEventListener('mouseenter', () => { dot.style.width = '46px'; dot.style.height = '46px'; dot.style.background = 'var(--vb-snake-head)'; });
+        el.addEventListener('mouseleave', () => { dot.style.width = '26px'; dot.style.height = '26px'; dot.style.background = 'var(--vb-accent)'; });
+      });
+    }
+
+    root.querySelectorAll('[data-card]').forEach(card => {
+      const img = card.querySelector('image-slot,[data-cover]');
+      if (!img) return;
+      img.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)';
+      card.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.06)'; });
+      card.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; });
+    });
+
+    this.initSnake();
+  }
+
+  loadOpentype() {
+    return new Promise((res, rej) => {
+      if (window.opentype) return res(window.opentype);
+      const s = document.createElement('script');
+      s.src = (window.__resources && window.__resources.opentypeLib) || 'https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js';
+      s.onload = () => window.opentype ? res(window.opentype) : rej(new Error('opentype missing'));
+      s.onerror = () => rej(new Error('opentype load error'));
+      document.head.appendChild(s);
+    });
+  }
+
+  async loadFont() {
+    const ot = await this.loadOpentype();
+    const urls = [
+      (window.__resources && window.__resources.snakeFont),
+      'https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk/files/space-grotesk-latin-700-normal.woff',
+      'https://cdn.jsdelivr.net/npm/@fontsource/space-grotesk@5.1.1/files/space-grotesk-latin-700-normal.woff'
+    ].filter(Boolean);
+    for (const u of urls) {
+      try {
+        const r = await fetch(u);
+        if (!r.ok) continue;
+        return ot.parse(await r.arrayBuffer());
+      } catch (e) {}
+    }
+    throw new Error('font fetch failed');
+  }
+
+  async initSnake() {
+    const h1 = document.getElementById('vb-name');
+    if (!h1) return;
+    let font;
+    try { font = await this.loadFont(); }
+    catch (e) { console.warn('snake: font unavailable, keeping plain name', e); return; }
+    this._font = font;
+    const build = () => { try { this.buildNameSnake(h1, font); } catch (e) { console.warn('snake build', e); } };
+    build();
+    let rz = 0;
+    this._onResize = () => { clearTimeout(rz); rz = setTimeout(build, 150); };
+    window.addEventListener('resize', this._onResize);
+  }
+
+  // Render the two-line name as real glyph outlines, then run one snake along
+  // the "V" outline and a second along the "B" outline.
+  buildNameSnake(h1, font) {
+    const FS = parseFloat(getComputedStyle(h1).fontSize) || 120;
+    if (this._lastFS === FS && this._snakeSvg && this._snakeSvg.isConnected) return; // only rebuild when size really changes
+    this._lastFS = FS;
+    if (this._snakeRaf) cancelAnimationFrame(this._snakeRaf);
+    const NS = 'http://www.w3.org/2000/svg';
+    const mk = (t) => document.createElementNS(NS, t);
+    const scale = FS / font.unitsPerEm;
+    const ascent = font.ascender * scale, descent = -font.descender * scale;
+    const lineStep = FS * 0.82;
+    const pad = Math.max(10, FS * 0.07);
+    const lines = ['Vijay', 'Bharvad'];
+
+    let maxW = 0;
+    const lineData = lines.map((ln, li) => {
+      const baseY = pad + ascent + li * lineStep;
+      const path = font.getPath(ln, pad, baseY, FS); // whole-word outline
+      const w = font.getAdvanceWidth(ln, FS);
+      if (w > maxW) maxW = w;
+      return path;
+    });
+    const W = maxW + pad * 2;
+    const H = pad + ascent + (lines.length - 1) * lineStep + descent + pad;
+
+    const svg = mk('svg');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('width', String(W));
+    svg.setAttribute('height', String(H));
+    svg.style.cssText = 'display:block;overflow:visible;max-width:100%;height:auto';
+
+    // one guide per WORD — snake 1 runs V→y across "Vijay", snake 2 runs B→d across "Bharvad"
+    const targets = [];
+    lineData.forEach((path) => {
+      const d = path.toPathData(2);
+      const glyph = mk('path');
+      glyph.setAttribute('d', d);
+      glyph.style.fill = 'var(--vb-text)';
+      svg.appendChild(glyph);
+      const guide = mk('path');
+      guide.setAttribute('d', d);
+      guide.setAttribute('fill', 'none');
+      guide.setAttribute('stroke', 'none');
+      svg.appendChild(guide);
+      targets.push(guide);
+    });
+
+    h1.textContent = '';
+    h1.appendChild(svg);
+    this._snakeSvg = svg;
+
+    const SNAKES_PER_WORD = 2;
+    const snakes = [];
+    targets.forEach((guide, idx) => {
+      const P = guide.getTotalLength();
+      for (let sIdx = 0; sIdx < SNAKES_PER_WORD; sIdx++) {
+        const COUNT = 15;
+        const headR = Math.max(3.5, FS * 0.04);
+        const segs = [];
+        for (let i = 0; i < COUNT; i++) {
+          const t = i / (COUNT - 1);
+          const c = mk('circle');
+          c.setAttribute('r', (headR * (1 - t * 0.72)).toFixed(2));
+          c.style.fill = i === 0 ? 'var(--vb-snake-head)' : 'var(--vb-accent-fill)';
+          c.setAttribute('opacity', (1 - t * 0.72).toFixed(2));
+          c.style.filter = i === 0
+            ? 'drop-shadow(0 0 ' + (headR * 1.5) + 'px var(--vb-accent-fill))'
+            : 'drop-shadow(0 0 ' + (headR * 0.7) + 'px color-mix(in oklab, var(--vb-accent-fill) 60%, transparent))';
+          svg.appendChild(c);
+          segs.push(c);
+        }
+        const eye = mk('circle');
+        eye.setAttribute('r', (headR * 0.3).toFixed(2));
+        eye.style.fill = 'var(--vb-snake-eye)';
+        svg.appendChild(eye);
+        snakes.push({
+          guide, P, segs, eye, headR,
+          gap: headR * 1.7,
+          head: (P / SNAKES_PER_WORD) * sIdx, // start on opposite ends of the outline
+          speed: (120 + idx * 70) * (sIdx === 0 ? 1 : 0.8)
+        });
+      }
+    });
+
+    let last = performance.now();
+    const tick = (now) => {
+      const dt = Math.min(0.05, (now - last) / 1000); last = now;
+      snakes.forEach((s) => {
+        s.head = (s.head + dt * s.speed) % s.P;
+        let hx = 0, hy = 0, nx = 0, ny = 0;
+        for (let i = 0; i < s.segs.length; i++) {
+          const d = (((s.head - i * s.gap) % s.P) + s.P) % s.P;
+          try {
+            const pt = s.guide.getPointAtLength(d);
+            s.segs[i].setAttribute('cx', pt.x); s.segs[i].setAttribute('cy', pt.y);
+            if (i === 0) { hx = pt.x; hy = pt.y; }
+            if (i === 1) { nx = pt.x; ny = pt.y; }
+          } catch (e) {}
+        }
+        const dx = hx - nx, dy = hy - ny, l = Math.hypot(dx, dy) || 1;
+        s.eye.setAttribute('cx', String(hx + (dx / l) * s.headR * 0.35));
+        s.eye.setAttribute('cy', String(hy + (dy / l) * s.headR * 0.35));
+      });
+      this._snakeRaf = requestAnimationFrame(tick);
+    };
+    this._snakeRaf = requestAnimationFrame(tick);
+  }
+
+  animateCount(el) {
+    const target = parseFloat(el.getAttribute('data-count'));
+    const dur = 1400;
+    const start = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * e).toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString();
+    };
+    requestAnimationFrame(step);
+  }
+
+  componentWillUnmount() {
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this._barRaf) cancelAnimationFrame(this._barRaf);
+    if (this._onBarMouse) document.removeEventListener('mousemove', this._onBarMouse);
+    if (this._onBarClick) document.removeEventListener('click', this._onBarClick);
+    if (this._snakeRaf) cancelAnimationFrame(this._snakeRaf);
+    if (this._snakeRO) this._snakeRO.disconnect();
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._cursor && this._cursor.parentNode) this._cursor.parentNode.removeChild(this._cursor);
+    if (this._bar && this._bar.parentNode) this._bar.parentNode.removeChild(this._bar);
+  }
+
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>
