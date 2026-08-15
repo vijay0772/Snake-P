@@ -1438,9 +1438,7 @@ class Component extends DCLogic {
       const hio = new IntersectionObserver((ents) => {
         ents.forEach(e => {
           this._heroOn = e.isIntersecting;
-          this._nameSnakeOn = e.isIntersecting;
           e.target.classList.toggle('off', !e.isIntersecting);
-          if (e.isIntersecting && this._startNameSnake) this._startNameSnake();
         });
       }, { threshold: 0 });
       hio.observe(heroEl);
@@ -1564,8 +1562,25 @@ class Component extends DCLogic {
     const snakes = [];
     targets.forEach((guide, idx) => {
       const P = guide.getTotalLength();
+      const SAMPLES = Math.max(240, Math.ceil(P / 2));
+      const samp = new Float32Array(SAMPLES * 2);
+      for (let i = 0; i < SAMPLES; i++) {
+        const pt = guide.getPointAtLength((i / SAMPLES) * P);
+        samp[i * 2] = pt.x; samp[i * 2 + 1] = pt.y;
+      }
+      const at = (d) => {
+        const t = (((d % P) + P) % P) / P;
+        const f = t * SAMPLES;
+        const i0 = Math.floor(f) % SAMPLES;
+        const i1 = (i0 + 1) % SAMPLES;
+        const u = f - Math.floor(f);
+        return {
+          x: samp[i0 * 2] * (1 - u) + samp[i1 * 2] * u,
+          y: samp[i0 * 2 + 1] * (1 - u) + samp[i1 * 2 + 1] * u
+        };
+      };
       for (let sIdx = 0; sIdx < SNAKES_PER_WORD; sIdx++) {
-        const COUNT = 8;
+        const COUNT = 15;
         const headR = Math.max(3.5, FS * 0.04);
         const segs = [];
         for (let i = 0; i < COUNT; i++) {
@@ -1574,7 +1589,9 @@ class Component extends DCLogic {
           c.setAttribute('r', (headR * (1 - t * 0.72)).toFixed(2));
           c.style.fill = i === 0 ? 'var(--vb-snake-head)' : 'var(--vb-accent-fill)';
           c.setAttribute('opacity', (1 - t * 0.72).toFixed(2));
-          if (i === 0) c.style.filter = 'drop-shadow(0 0 ' + (headR * 1.2) + 'px var(--vb-accent-fill))';
+          c.style.filter = i === 0
+            ? 'drop-shadow(0 0 ' + (headR * 1.5) + 'px var(--vb-accent-fill))'
+            : 'drop-shadow(0 0 ' + (headR * 0.7) + 'px color-mix(in oklab, var(--vb-accent-fill) 60%, transparent))';
           svg.appendChild(c);
           segs.push(c);
         }
@@ -1583,9 +1600,9 @@ class Component extends DCLogic {
         eye.style.fill = 'var(--vb-snake-eye)';
         svg.appendChild(eye);
         snakes.push({
-          guide, P, segs, eye, headR,
+          at, P, segs, eye, headR,
           gap: headR * 1.7,
-          head: (P / SNAKES_PER_WORD) * sIdx, // start on opposite ends of the outline
+          head: (P / SNAKES_PER_WORD) * sIdx,
           speed: (120 + idx * 70) * (sIdx === 0 ? 1 : 0.8)
         });
       }
@@ -1608,27 +1625,25 @@ class Component extends DCLogic {
     this._nameSnakeOn = true;
     let last = performance.now();
     const tick = (now) => {
-      if (document.hidden || !this._nameSnakeOn) { this._snakeRaf = 0; return; }
+      if (document.hidden) { this._snakeRaf = 0; return; }
       const dt = Math.min(0.05, (now - last) / 1000); last = now;
       snakes.forEach((s) => {
         s.head = (s.head + dt * s.speed) % s.P;
         let hx = 0, hy = 0, nx = 0, ny = 0;
         for (let i = 0; i < s.segs.length; i++) {
-          const d = (((s.head - i * s.gap) % s.P) + s.P) % s.P;
-          try {
-            const pt = s.guide.getPointAtLength(d);
-            s.segs[i].setAttribute('cx', pt.x); s.segs[i].setAttribute('cy', pt.y);
-            if (i === 0) { hx = pt.x; hy = pt.y; }
-            if (i === 1) { nx = pt.x; ny = pt.y; }
-          } catch (e) {}
+          const pt = s.at(s.head - i * s.gap);
+          s.segs[i].setAttribute('cx', pt.x.toFixed(2));
+          s.segs[i].setAttribute('cy', pt.y.toFixed(2));
+          if (i === 0) { hx = pt.x; hy = pt.y; }
+          if (i === 1) { nx = pt.x; ny = pt.y; }
         }
         const dx = hx - nx, dy = hy - ny, l = Math.hypot(dx, dy) || 1;
-        s.eye.setAttribute('cx', String(hx + (dx / l) * s.headR * 0.35));
-        s.eye.setAttribute('cy', String(hy + (dy / l) * s.headR * 0.35));
+        s.eye.setAttribute('cx', (hx + (dx / l) * s.headR * 0.35).toFixed(2));
+        s.eye.setAttribute('cy', (hy + (dy / l) * s.headR * 0.35).toFixed(2));
       });
       this._snakeRaf = requestAnimationFrame(tick);
     };
-    this._startNameSnake = () => { if (!this._snakeRaf && this._nameSnakeOn) this._snakeRaf = requestAnimationFrame(tick); };
+    this._startNameSnake = () => { if (!this._snakeRaf) this._snakeRaf = requestAnimationFrame(tick); };
     this._snakeRaf = requestAnimationFrame(tick);
   }
 
