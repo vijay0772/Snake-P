@@ -3,6 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vijay Bharvad — Software Engineer, AI Systems</title>
+<meta name="description" content="Software engineer at Halluminate (YC S25) building AI systems that ship to production — LLM evaluation, event-driven systems, and APIs that hold up under real load. 15 shipped projects.">
+<link rel="canonical" href="https://vijaybharvad.com/">
+<link rel="icon" type="image/png" href="./snake.png">
+<link rel="apple-touch-icon" href="./snake.png">
+<meta name="theme-color" content="#10160f">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vijaybharvad.com/">
+<meta property="og:title" content="Vijay Bharvad — Software Engineer, AI Systems">
+<meta property="og:description" content="Building AI systems that ship to production at Halluminate (YC S25). LLM evaluation, event-driven systems, and production APIs.">
+<meta property="og:image" content="https://vijaybharvad.com/snake.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vijay Bharvad — Software Engineer, AI Systems">
+<meta name="twitter:description" content="Building AI systems that ship to production at Halluminate (YC S25).">
+<meta name="twitter:image" content="https://vijaybharvad.com/snake.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Vijay Bharvad",
+  "jobTitle": "Software Engineer",
+  "worksFor": { "@type": "Organization", "name": "Halluminate (YC S25)" },
+  "alumniOf": { "@type": "CollegeOrUniversity", "name": "Illinois Institute of Technology" },
+  "url": "https://vijaybharvad.com/",
+  "email": "mailto:vijaybharvad0097@gmail.com",
+  "sameAs": [
+    "https://www.linkedin.com/in/vijay-bharvad-a44085210/",
+    "https://github.com/vijay0772"
+  ]
+}
+</script>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -84,6 +115,8 @@
   @keyframes vbglow{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
   @keyframes vbaccentglow{0%,100%{text-shadow:0 0 0px transparent}50%{text-shadow:0 0 22px color-mix(in oklab, var(--vb-accent-fill) 50%, transparent)}}
   @keyframes vbnamesnake{0%{background-position:100% 0}100%{background-position:0% 0}}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--vb-accent);outline-offset:3px;border-radius:6px}
+  @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
 </style>
 </helmet>
 <div id="vb-root" style="position:relative">
@@ -161,9 +194,15 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Selected work</span>
           <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
         </div>
+        <div data-reveal="1" id="vb-filters" role="group" aria-label="Filter projects" style="display:flex;flex-wrap:wrap;gap:10px;margin:-16px 0 40px">
+          <button type="button" data-filter="all" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">All</button>
+          <button type="button" data-filter="ai" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">AI / LLM</button>
+          <button type="button" data-filter="fullstack" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">Full-Stack</button>
+          <button type="button" data-filter="web" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">Client Sites</button>
+        </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,2.5vw,32px)">
 
-          <a href="https://orbit-guardians.netlify.app" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://orbit-guardians.netlify.app" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -192,7 +231,7 @@
             </div>
           </a>
 
-          <a href="https://www.youtube.com/watch?v=cB5GCnFQf-o" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://www.youtube.com/watch?v=cB5GCnFQf-o" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -223,7 +262,7 @@
             </div>
           </a>
 
-          <a href="https://after-image-brown.vercel.app" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://after-image-brown.vercel.app" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -253,7 +292,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/SlackBot/tree/main/slack-ai-bot" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/SlackBot/tree/main/slack-ai-bot" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -282,7 +321,7 @@
             </div>
           </a>
 
-          <a href="https://stitchfinn-atbb.vercel.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://stitchfinn-atbb.vercel.app/" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -312,7 +351,7 @@
             </div>
           </a>
 
-          <a href="https://v-pharma.vercel.app" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://v-pharma.vercel.app" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -342,7 +381,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/v-projectt" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/v-projectt" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -374,7 +413,7 @@
             </div>
           </a>
 
-          <a href="https://quick-serve-phi.vercel.app/home" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://quick-serve-phi.vercel.app/home" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -400,7 +439,7 @@
             </div>
           </a>
 
-          <a href="https://school-blogging-platformm-awf9.vercel.app/login" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://school-blogging-platformm-awf9.vercel.app/login" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -428,7 +467,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/SmartHomes" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/SmartHomes" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -453,7 +492,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/Craftsman" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/Craftsman" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -477,7 +516,7 @@
             </div>
           </a>
 
-          <a href="https://quickquiz-for-you.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://quickquiz-for-you.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -503,7 +542,7 @@
             </div>
           </a>
 
-          <a href="https://sarjaniindustries.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://sarjaniindustries.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -530,7 +569,7 @@
             </div>
           </a>
 
-          <a href="https://marwiz.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://marwiz.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -559,7 +598,7 @@
             </div>
           </a>
 
-          <a href="https://digimapp.netlify.app/" target="_blank" rel="noopener" data-card="1" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://digimapp.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -629,6 +668,8 @@
         <h2 data-reveal="1" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
         <div data-reveal="1" data-delay="100" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
           <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
+          <button id="vb-copy-email" type="button" style="font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border-radius:10px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:border-color .25s,color .25s" style-hover="border-color:var(--vb-hover-border);color:var(--vb-accent)">Copy email</button>
+          <a href="https://github.com/vijay0772" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> GitHub</a>
           <a href="https://www.linkedin.com/in/vijay-bharvad-a44085210/" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> LinkedIn</a>
           <a href="tel:+15716042926" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">☎</span> (571) 604-2926</a>
         </div>
@@ -672,7 +713,42 @@ class Component extends DCLogic {
       try { localStorage.setItem('vb-theme', theme); } catch (e) {}
     });
 
+    this._reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = this._reduceMotion;
+
+    // project category filters
+    const chips = root.querySelectorAll('[data-filter]');
+    const setFilter = (f) => {
+      chips.forEach(ch => {
+        const active = ch.getAttribute('data-filter') === f;
+        ch.style.background = active ? 'var(--vb-accent-fill)' : 'transparent';
+        ch.style.color = active ? 'var(--vb-on-accent)' : 'var(--vb-muted-2)';
+        ch.style.borderColor = active ? 'var(--vb-accent-fill)' : 'var(--vb-border-3)';
+        ch.setAttribute('aria-pressed', active ? 'true' : 'false');
+      });
+      root.querySelectorAll('[data-card]').forEach(card => {
+        const cats = (card.getAttribute('data-cat') || '').split(' ');
+        card.style.display = (f === 'all' || cats.indexOf(f) !== -1) ? 'flex' : 'none';
+      });
+    };
+    chips.forEach(ch => ch.addEventListener('click', () => setFilter(ch.getAttribute('data-filter'))));
+    setFilter('all');
+
+    // copy email to clipboard
+    const copyBtn = document.getElementById('vb-copy-email');
+    if (copyBtn) copyBtn.addEventListener('click', () => {
+      const done = () => {
+        copyBtn.textContent = 'Copied ✓';
+        setTimeout(() => { copyBtn.textContent = 'Copy email'; }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText('vijaybharvad0097@gmail.com').then(done).catch(done);
+      } else done();
+    });
+
     const nav = document.getElementById('vb-nav');
+    let barTarget = 0;
+    if (!reduceMotion) {
     // scroll progress: a life-like snake crawls around the whole viewport border.
     // Follow-the-leader chain (simple IK): each segment keeps a fixed distance
     // from the one ahead, which produces organic slithering around corners.
@@ -684,7 +760,7 @@ class Component extends DCLogic {
     const SEGS = 46, SPACING = 7, MARGIN = 11;
     const pts = [];
     for (let i = 0; i < SEGS; i++) pts.push({ x: MARGIN + 40 - i * SPACING, y: MARGIN });
-    let barTarget = 0, headD = 0, btick = 0, mx = -9999, my = -9999;
+    let headD = 0, btick = 0, mx = -9999, my = -9999;
     let colAccent = 'oklch(0.87 0.21 140)', colFill = colAccent;
 
     const headImgEl = new Image();
@@ -825,6 +901,7 @@ class Component extends DCLogic {
       this._barRaf = requestAnimationFrame(barTick);
     };
     this._barRaf = requestAnimationFrame(barTick);
+    } // end !reduceMotion (border snake)
 
     const onScroll = () => {
       const sc = document.documentElement.scrollHeight - window.innerHeight;
@@ -844,31 +921,33 @@ class Component extends DCLogic {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    const revs = root.querySelectorAll('[data-reveal]');
-    revs.forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(28px)';
-      el.style.transition = 'opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1)';
-      el.style.willChange = 'opacity, transform';
-    });
-    const io = new IntersectionObserver((ents) => {
-      ents.forEach(e => {
-        if (e.isIntersecting) {
-          const d = parseInt(e.target.getAttribute('data-delay') || '0', 10);
-          setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'none'; }, d);
-          io.unobserve(e.target);
-        }
+    if (!reduceMotion) {
+      const revs = root.querySelectorAll('[data-reveal]');
+      revs.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(28px)';
+        el.style.transition = 'opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1)';
+        el.style.willChange = 'opacity, transform';
       });
-    }, { threshold: 0.14, rootMargin: '0px 0px -7% 0px' });
-    revs.forEach(el => io.observe(el));
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach(e => {
+          if (e.isIntersecting) {
+            const d = parseInt(e.target.getAttribute('data-delay') || '0', 10);
+            setTimeout(() => { e.target.style.opacity = '1'; e.target.style.transform = 'none'; }, d);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.14, rootMargin: '0px 0px -7% 0px' });
+      revs.forEach(el => io.observe(el));
 
-    const counters = root.querySelectorAll('[data-count]');
-    const cio = new IntersectionObserver((ents) => {
-      ents.forEach(e => { if (e.isIntersecting) { this.animateCount(e.target); cio.unobserve(e.target); } });
-    }, { threshold: 0.6 });
-    counters.forEach(el => cio.observe(el));
+      const counters = root.querySelectorAll('[data-count]');
+      const cio = new IntersectionObserver((ents) => {
+        ents.forEach(e => { if (e.isIntersecting) { this.animateCount(e.target); cio.unobserve(e.target); } });
+      }, { threshold: 0.6 });
+      counters.forEach(el => cio.observe(el));
+    }
 
-    if (fine) {
+    if (fine && !reduceMotion) {
       root.querySelectorAll('[data-magnetic]').forEach(el => {
         el.style.transition = 'transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .3s, background .25s, color .25s';
         el.addEventListener('mousemove', (ev) => {
@@ -939,8 +1018,10 @@ class Component extends DCLogic {
   }
 
   async initSnake() {
+    if (this._reduceMotion) return; // keep the name as plain text
     const h1 = document.getElementById('vb-name');
     if (!h1) return;
+    h1.setAttribute('aria-label', 'Vijay Bharvad');
     let font;
     try { font = await this.loadFont(); }
     catch (e) { console.warn('snake: font unavailable, keeping plain name', e); return; }
@@ -979,6 +1060,7 @@ class Component extends DCLogic {
     const H = pad + ascent + (lines.length - 1) * lineStep + descent + pad;
 
     const svg = mk('svg');
+    svg.setAttribute('aria-hidden', 'true');
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     svg.setAttribute('width', String(W));
     svg.setAttribute('height', String(H));
