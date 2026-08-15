@@ -112,7 +112,7 @@
   a:hover{color:var(--vb-accent)}
   ::selection{background:var(--vb-accent-fill);color:var(--vb-on-accent)}
   @keyframes vbpulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
-  @keyframes vbglow{0%,100%{opacity:.45;transform:translate(-50%,-50%) scale(1)}50%{opacity:.8;transform:translate(-50%,-50%) scale(1.1)}}
+  @keyframes vbglow{0%,100%{opacity:.45;transform:translate(calc(-50% + var(--gx,0px)),calc(-50% + var(--gy,0px))) scale(1)}50%{opacity:.8;transform:translate(calc(-50% + var(--gx,0px)),calc(-50% + var(--gy,0px))) scale(1.1)}}
   @keyframes vbaccentglow{0%,100%{text-shadow:0 0 0px transparent}50%{text-shadow:0 0 22px color-mix(in oklab, var(--vb-accent-fill) 50%, transparent)}}
   @keyframes vbnamesnake{0%{background-position:100% 0}100%{background-position:0% 0}}
   a:focus-visible,button:focus-visible{outline:2px solid var(--vb-accent);outline-offset:3px;border-radius:6px}
@@ -126,7 +126,7 @@
   #vb-nav > div > a{position:relative}
   #vb-nav > div > a::after{content:'';position:absolute;left:0;bottom:-5px;width:100%;height:1px;background:var(--vb-accent);transform:scaleX(0);transform-origin:0 50%;transition:transform .28s cubic-bezier(.2,.7,.2,1)}
   #vb-nav > div > a:hover::after{transform:scaleX(1)}
-  [data-card]{transition:border-color .3s,transform .3s,box-shadow .35s !important}
+  [data-card]{transition:border-color .3s,box-shadow .35s,opacity .32s,filter .32s !important;transform-style:preserve-3d}
   [data-card]:hover{box-shadow:0 22px 48px -20px color-mix(in oklab, var(--vb-accent-fill) 28%, transparent)}
   .vb-arr{display:inline-block;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
   [data-card]:hover .vb-arr{transform:translate(4px,-4px)}
@@ -135,6 +135,27 @@
   [data-filter]:active{transform:scale(.95)}
   [data-count]{font-variant-numeric:tabular-nums}
   @media (max-height:620px){#vb-scrollhint{display:none}}
+  @media (pointer:fine){
+    html.vb-has-cursor,html.vb-has-cursor *{cursor:none !important}
+  }
+  .vb-spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;z-index:3;mix-blend-mode:soft-light}
+  [data-card]:hover .vb-spot{opacity:1}
+  [data-card].vb-card-out{opacity:0 !important;transform:scale(.92) !important;filter:blur(6px);pointer-events:none !important}
+  #vb-nav a[data-nav].is-active{color:var(--vb-accent) !important}
+  #vb-nav a[data-nav].is-active::after{transform:scaleX(1)}
+  [data-words] .vb-w{color:var(--vb-muted-4);transition:color .35s}
+  [data-words] .vb-w.on{color:var(--vb-text)}
+  [data-words] .vb-w.acc{color:var(--vb-muted-4)}
+  [data-words] .vb-w.acc.on{color:var(--vb-accent)}
+  #vb-cmd{position:fixed;inset:0;z-index:200;display:none;place-items:center;background:color-mix(in oklab, var(--vb-bg) 55%, transparent);backdrop-filter:blur(10px)}
+  #vb-cmd.open{display:grid}
+  #vb-cmd-box{width:min(520px,92vw);border:1px solid var(--vb-border-2);border-radius:16px;background:var(--vb-surface);box-shadow:0 30px 80px color-mix(in oklab, var(--vb-bg) 70%, transparent);overflow:hidden}
+  #vb-cmd-list button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;padding:13px 16px;border:0;background:transparent;color:var(--vb-text);font:inherit;text-align:left}
+  #vb-cmd-list button:hover,#vb-cmd-list button[aria-selected="true"]{background:color-mix(in oklab, var(--vb-accent-fill) 14%, transparent);color:var(--vb-accent)}
+  #vb-cmd kbd{font-family:'JetBrains Mono',monospace;font-size:11px;padding:2px 7px;border-radius:6px;border:1px solid var(--vb-border-3);color:var(--vb-muted-3)}
+  #vb-cmd-btn{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 8px;border-radius:8px;border:1px solid var(--vb-border-2);background:var(--vb-surface);color:var(--vb-muted-2);line-height:1}
+  #vb-cmd-btn:hover{border-color:var(--vb-hover-border);color:var(--vb-accent)}
+  .vb-trail{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9998;background:var(--vb-accent-fill);transform:translate(-50%,-50%)}
 </style>
 </helmet>
 <div id="vb-root" style="position:relative">
@@ -145,9 +166,10 @@
       Vijay Bharvad
     </a>
     <div style="display:flex;align-items:center;gap:clamp(18px,3vw,36px)">
-      <a href="#work" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-2)">Work</a>
-      <a href="#about" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-2)">Experience</a>
-      <a href="#contact" data-magnetic="1" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</a>
+      <a href="#work" data-nav="work" data-scramble="1" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-2)">Work</a>
+      <a href="#about" data-nav="about" data-scramble="1" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-2)">Experience</a>
+      <a href="#contact" data-nav="contact" data-scramble="1" data-magnetic="1" style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</a>
+      <button id="vb-cmd-btn" type="button" aria-label="Open command menu">⌘K</button>
       <button id="vb-theme-btn" type="button" aria-label="Toggle light / dark mode" style="display:grid;place-items:center;width:34px;height:34px;border-radius:10px;border:1px solid var(--vb-border-2);background:var(--vb-surface);color:var(--vb-text);cursor:pointer;font-size:15px;line-height:1;transition:border-color .3s,transform .2s" style-hover="border-color:var(--vb-hover-border);transform:scale(1.08)">☀</button>
     </div>
   </nav>
@@ -156,7 +178,7 @@
 
     <!-- HERO -->
     <section id="top" data-screen-label="Hero" style="min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px clamp(20px,5vw,72px) 80px;position:relative;overflow:hidden">
-      <div aria-hidden="true" style="position:absolute;top:22%;left:56%;width:min(720px,74vw);height:min(720px,74vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 16%, transparent),transparent 60%);filter:blur(30px);animation:vbglow 9s ease-in-out infinite;z-index:0"></div>
+      <div id="vb-hero-glow" aria-hidden="true" style="position:absolute;top:22%;left:56%;width:min(720px,74vw);height:min(720px,74vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 16%, transparent),transparent 60%);filter:blur(30px);animation:vbglow 9s ease-in-out infinite;z-index:0;--gx:0px;--gy:0px"></div>
       <div style="max-width:1080px;margin:0 auto;width:100%;position:relative;z-index:1">
         <div data-reveal="1" style="display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;border:1px solid var(--vb-badge-border);background:var(--vb-badge-bg);margin-bottom:clamp(22px,3vh,36px)">
           <span style="width:8px;height:8px;border-radius:50%;background:var(--vb-accent-fill);animation:vbpulse 1.8s ease-in-out infinite;box-shadow:0 0 12px var(--vb-accent-fill)"></span>
@@ -202,7 +224,7 @@
     <!-- STATEMENT -->
     <section style="padding:clamp(100px,16vh,200px) clamp(20px,5vw,72px)">
       <div style="max-width:1080px;margin:0 auto">
-        <p data-reveal="1" style="font-size:clamp(1.8rem,4.4vw,3.4rem);line-height:1.22;letter-spacing:-0.025em;font-weight:500;max-width:20ch">I work where <span style="color:var(--vb-accent);animation:vbaccentglow 4.2s ease-in-out infinite">AI meets production reality</span> — LLM evaluation, event-driven systems, and APIs that hold up under real load.</p>
+        <p data-reveal="1" data-words="1" style="font-size:clamp(1.8rem,4.4vw,3.4rem);line-height:1.22;letter-spacing:-0.025em;font-weight:500;max-width:20ch">I work where <span style="color:var(--vb-accent);animation:vbaccentglow 4.2s ease-in-out infinite">AI meets production reality</span> — LLM evaluation, event-driven systems, and APIs that hold up under real load.</p>
       </div>
     </section>
 
@@ -219,9 +241,9 @@
           <button type="button" data-filter="fullstack" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">Full-Stack</button>
           <button type="button" data-filter="web" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">Client Sites</button>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,2.5vw,32px)">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,2.5vw,32px);perspective:1200px">
 
-          <a href="https://orbit-guardians.netlify.app" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://orbit-guardians.netlify.app" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -250,7 +272,7 @@
             </div>
           </a>
 
-          <a href="https://www.youtube.com/watch?v=cB5GCnFQf-o" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://www.youtube.com/watch?v=cB5GCnFQf-o" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -281,7 +303,7 @@
             </div>
           </a>
 
-          <a href="https://after-image-brown.vercel.app" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://after-image-brown.vercel.app" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -311,7 +333,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/SlackBot/tree/main/slack-ai-bot" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/SlackBot/tree/main/slack-ai-bot" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -340,7 +362,7 @@
             </div>
           </a>
 
-          <a href="https://stitchfinn-atbb.vercel.app/" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://stitchfinn-atbb.vercel.app/" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -370,7 +392,7 @@
             </div>
           </a>
 
-          <a href="https://v-pharma.vercel.app" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://v-pharma.vercel.app" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -400,7 +422,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/v-projectt" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/v-projectt" target="_blank" rel="noopener" data-card="1" data-cat="ai" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -432,7 +454,7 @@
             </div>
           </a>
 
-          <a href="https://quick-serve-phi.vercel.app/home" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://quick-serve-phi.vercel.app/home" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -458,7 +480,7 @@
             </div>
           </a>
 
-          <a href="https://school-blogging-platformm-awf9.vercel.app/login" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://school-blogging-platformm-awf9.vercel.app/login" target="_blank" rel="noopener" data-card="1" data-cat="ai fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -486,7 +508,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/SmartHomes" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/SmartHomes" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -511,7 +533,7 @@
             </div>
           </a>
 
-          <a href="https://github.com/vijay0772/Craftsman" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://github.com/vijay0772/Craftsman" target="_blank" rel="noopener" data-card="1" data-cat="fullstack" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -535,7 +557,7 @@
             </div>
           </a>
 
-          <a href="https://quickquiz-for-you.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://quickquiz-for-you.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -561,7 +583,7 @@
             </div>
           </a>
 
-          <a href="https://sarjaniindustries.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://sarjaniindustries.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -588,7 +610,7 @@
             </div>
           </a>
 
-          <a href="https://marwiz.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://marwiz.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" data-delay="120" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -617,7 +639,7 @@
             </div>
           </a>
 
-          <a href="https://digimapp.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border);transform:translateY(-4px)">
+          <a href="https://digimapp.netlify.app/" target="_blank" rel="noopener" data-card="1" data-cat="web" data-reveal="1" style="display:flex;flex-direction:column;border:1px solid var(--vb-border-2);border-radius:18px;overflow:hidden;background:var(--vb-surface);transition:border-color .3s,transform .3s" style-hover="border-color:var(--vb-hover-border)">
             <div style="position:relative;aspect-ratio:16/10;background:var(--vb-surface-2)">
               <div data-cover="1" style="position:absolute;inset:0">
                 <svg viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="width:100%;height:100%;display:block">
@@ -702,7 +724,7 @@
     <footer style="border-top:1px solid var(--vb-border-1);padding:30px clamp(20px,5vw,72px)">
       <div style="max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-4)">
         <span style="display:inline-flex;align-items:center;gap:8px"><img src="./snake.png" alt="" width="14" height="14" style="filter:invert(60%) sepia(80%) saturate(1200%) hue-rotate(75deg)">Vijay Bharvad</span>
-        <span>© 2026 · Built in NYC</span>
+        <span id="vb-foot-hint">© 2026 · Built in NYC</span>
         <a href="#top" style="color:var(--vb-muted-2)">Back to top <span style="color:var(--vb-accent)">↑</span></a>
       </div>
     </footer>
@@ -740,8 +762,10 @@ class Component extends DCLogic {
     this._reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const reduceMotion = this._reduceMotion;
 
-    // project category filters
+    // project category filters — cards stagger out / in instead of popping
     const chips = root.querySelectorAll('[data-filter]');
+    const cards = Array.from(root.querySelectorAll('[data-card]'));
+    let filterTimer = 0;
     const setFilter = (f) => {
       chips.forEach(ch => {
         const active = ch.getAttribute('data-filter') === f;
@@ -750,10 +774,32 @@ class Component extends DCLogic {
         ch.style.borderColor = active ? 'var(--vb-accent-fill)' : 'var(--vb-border-3)';
         ch.setAttribute('aria-pressed', active ? 'true' : 'false');
       });
-      root.querySelectorAll('[data-card]').forEach(card => {
+      clearTimeout(filterTimer);
+      let showI = 0;
+      cards.forEach((card) => {
         const cats = (card.getAttribute('data-cat') || '').split(' ');
-        card.style.display = (f === 'all' || cats.indexOf(f) !== -1) ? 'flex' : 'none';
+        const show = (f === 'all' || cats.indexOf(f) !== -1);
+        if (show) {
+          card.style.display = 'flex';
+          card.style.opacity = '1';
+          if (reduceMotion) { card.classList.remove('vb-card-out'); return; }
+          card.classList.add('vb-card-out');
+          const delay = showI * 50;
+          showI++;
+          setTimeout(() => card.classList.remove('vb-card-out'), 20 + delay);
+        } else if (reduceMotion) {
+          card.style.display = 'none';
+        } else {
+          card.classList.add('vb-card-out');
+        }
       });
+      if (!reduceMotion) {
+        filterTimer = setTimeout(() => {
+          cards.forEach(card => {
+            if (card.classList.contains('vb-card-out')) card.style.display = 'none';
+          });
+        }, 340);
+      }
     };
     chips.forEach(ch => ch.addEventListener('click', () => setFilter(ch.getAttribute('data-filter'))));
     setFilter('all');
@@ -928,6 +974,40 @@ class Component extends DCLogic {
     } // end !reduceMotion (border snake)
 
     const scrollHint = root.querySelector('#vb-scrollhint');
+    const wordSpans = [];
+    const stmt = root.querySelector('[data-words]');
+    if (stmt) {
+      const wrapWords = (node, acc) => {
+        const parts = (node.textContent || '').split(/(\s+)/);
+        const frag = document.createDocumentFragment();
+        parts.forEach(p => {
+          if (!p) return;
+          if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+          const s = document.createElement('span');
+          s.className = 'vb-w' + (acc ? ' acc' : '');
+          s.textContent = p;
+          frag.appendChild(s);
+          wordSpans.push(s);
+        });
+        node.parentNode.replaceChild(frag, node);
+      };
+      Array.from(stmt.childNodes).forEach(n => {
+        if (n.nodeType === 3) wrapWords(n, false);
+        else if (n.nodeType === 1) {
+          Array.from(n.childNodes).forEach(c => { if (c.nodeType === 3) wrapWords(c, true); });
+        }
+      });
+    }
+    const updateWords = () => {
+      if (!stmt || !wordSpans.length) return;
+      if (reduceMotion) { wordSpans.forEach(w => w.classList.add('on')); return; }
+      const r = stmt.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const start = vh * 0.88, end = vh * 0.32;
+      const p = Math.min(1, Math.max(0, (start - r.top) / (start - end)));
+      const n = Math.round(p * wordSpans.length);
+      wordSpans.forEach((w, i) => w.classList.toggle('on', i < n));
+    };
     const onScroll = () => {
       const sc = document.documentElement.scrollHeight - window.innerHeight;
       barTarget = sc > 0 ? Math.min(1, window.scrollY / sc) : 0;
@@ -943,9 +1023,25 @@ class Component extends DCLogic {
         nav.style.backdropFilter = 'none';
         nav.style.webkitBackdropFilter = 'none';
       }
+      updateWords();
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+
+    // active nav link follows the section in view
+    const navLinks = root.querySelectorAll('[data-nav]');
+    if (navLinks.length) {
+      const sio = new IntersectionObserver((ents) => {
+        ents.forEach(e => {
+          if (!e.isIntersecting) return;
+          navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('data-nav') === e.target.id));
+        });
+      }, { rootMargin: '-42% 0px -48% 0px', threshold: 0 });
+      ['work', 'about', 'contact'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) sio.observe(el);
+      });
+    }
 
     if (!reduceMotion) {
       const revs = root.querySelectorAll('[data-reveal]');
@@ -985,32 +1081,165 @@ class Component extends DCLogic {
         el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
       });
 
+      document.documentElement.classList.add('vb-has-cursor');
       const dot = document.createElement('div');
       const snakeMask = "url('./icons8-year-of-snake-16.png') center / contain no-repeat";
       dot.style.cssText = 'position:fixed;top:0;left:0;width:26px;height:26px;background:var(--vb-accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .22s,height .22s,background .22s;-webkit-mask:' + snakeMask + ';mask:' + snakeMask + ';filter:drop-shadow(0 0 8px color-mix(in oklab, var(--vb-accent-fill) 60%, transparent))';
       document.body.appendChild(dot);
       this._cursor = dot;
-      let tx = 0, ty = 0, cx = 0, cy = 0;
+      this._trails = [];
+      for (let i = 0; i < 7; i++) {
+        const t = document.createElement('div');
+        t.className = 'vb-trail';
+        const s = 12 - i;
+        t.style.width = t.style.height = s + 'px';
+        t.style.opacity = String(0.42 - i * 0.05);
+        document.body.appendChild(t);
+        this._trails.push({ el: t, x: 0, y: 0 });
+      }
+      const glow = document.getElementById('vb-hero-glow');
+      let tx = 0, ty = 0, cx = 0, cy = 0, gx = 0, gy = 0;
       window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
       const loop = () => {
         cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
         dot.style.left = cx + 'px'; dot.style.top = cy + 'px';
+        let px = cx, py = cy;
+        this._trails.forEach((tr, i) => {
+          const ease = 0.28 - i * 0.025;
+          tr.x += (px - tr.x) * ease;
+          tr.y += (py - tr.y) * ease;
+          tr.el.style.left = tr.x + 'px';
+          tr.el.style.top = tr.y + 'px';
+          px = tr.x; py = tr.y;
+        });
+        if (glow) {
+          const twx = (tx - window.innerWidth * 0.56) * 0.12;
+          const twy = (ty - window.innerHeight * 0.32) * 0.1;
+          gx += (twx - gx) * 0.06; gy += (twy - gy) * 0.06;
+          glow.style.setProperty('--gx', gx.toFixed(1) + 'px');
+          glow.style.setProperty('--gy', gy.toFixed(1) + 'px');
+        }
         this._raf = requestAnimationFrame(loop);
       };
       loop();
-      root.querySelectorAll('a,[data-magnetic]').forEach(el => {
+      root.querySelectorAll('a,button,[data-magnetic]').forEach(el => {
         el.addEventListener('mouseenter', () => { dot.style.width = '46px'; dot.style.height = '46px'; dot.style.background = 'var(--vb-snake-head)'; });
         el.addEventListener('mouseleave', () => { dot.style.width = '26px'; dot.style.height = '26px'; dot.style.background = 'var(--vb-accent)'; });
+      });
+
+      // nav / label scramble — letters flicker then resolve
+      const glyphs = '!<>-_\\/[]{}—=+*^?#________';
+      root.querySelectorAll('[data-scramble]').forEach(el => {
+        const orig = el.textContent;
+        el.dataset.orig = orig;
+        let timer = 0;
+        el.addEventListener('mouseenter', () => {
+          clearInterval(timer);
+          let frame = 0;
+          const total = orig.length * 4;
+          timer = setInterval(() => {
+            el.textContent = orig.split('').map((ch, i) => {
+              if (ch === ' ') return ' ';
+              if (i < frame / 4) return orig[i];
+              return glyphs[Math.floor(Math.random() * glyphs.length)];
+            }).join('');
+            frame++;
+            if (frame > total) { el.textContent = orig; clearInterval(timer); }
+          }, 24);
+        });
+        el.addEventListener('mouseleave', () => { clearInterval(timer); el.textContent = orig; });
       });
     }
 
     root.querySelectorAll('[data-card]').forEach(card => {
       const img = card.querySelector('image-slot,[data-cover]');
-      if (!img) return;
-      img.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)';
-      card.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.06)'; });
-      card.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; });
+      if (img) img.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)';
+      const spot = document.createElement('div');
+      spot.className = 'vb-spot';
+      card.style.position = 'relative';
+      card.appendChild(spot);
+      if (!fine || reduceMotion) {
+        if (img) {
+          card.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.06)'; });
+          card.addEventListener('mouseleave', () => { img.style.transform = 'scale(1)'; });
+        }
+        return;
+      }
+      card.addEventListener('mousemove', (ev) => {
+        const r = card.getBoundingClientRect();
+        const x = (ev.clientX - r.left) / r.width;
+        const y = (ev.clientY - r.top) / r.height;
+        const rx = (0.5 - y) * 11;
+        const ry = (x - 0.5) * 14;
+        card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-8px)';
+        spot.style.background = 'radial-gradient(420px circle at ' + (x * 100).toFixed(1) + '% ' + (y * 100).toFixed(1) + '%, color-mix(in oklab, var(--vb-accent-fill) 42%, transparent), transparent 58%)';
+        if (img) img.style.transform = 'scale(1.07)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        spot.style.background = '';
+        if (img) img.style.transform = 'scale(1)';
+      });
     });
+
+    // ⌘K command palette
+    const cmdItems = [
+      { label: 'Go to work', hint: 'W', run: () => document.getElementById('work')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }) },
+      { label: 'Go to experience', hint: 'E', run: () => document.getElementById('about')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }) },
+      { label: 'Go to contact', hint: 'C', run: () => document.getElementById('contact')?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }) },
+      { label: 'Copy email', hint: 'M', run: () => { if (copyBtn) copyBtn.click(); } },
+      { label: 'Toggle theme', hint: 'T', run: () => { if (themeBtn) themeBtn.click(); } },
+      { label: 'View resume', hint: 'R', run: () => window.open('./Vijay_CV_2026.pdf', '_blank', 'noopener') },
+      { label: 'Open GitHub', hint: 'G', run: () => window.open('https://github.com/vijay0772', '_blank', 'noopener') },
+      { label: 'Open LinkedIn', hint: 'L', run: () => window.open('https://www.linkedin.com/in/vijay-bharvad-a44085210/', '_blank', 'noopener') }
+    ];
+    const cmd = document.createElement('div');
+    cmd.id = 'vb-cmd';
+    cmd.setAttribute('role', 'dialog');
+    cmd.setAttribute('aria-label', 'Command menu');
+    cmd.innerHTML = '<div id="vb-cmd-box"><div style="padding:14px 16px;border-bottom:1px solid var(--vb-border-1);font-family:\'JetBrains Mono\',monospace;font-size:12px;color:var(--vb-muted-3)">Jump anywhere · Esc to close</div><div id="vb-cmd-list"></div></div>';
+    document.body.appendChild(cmd);
+    this._cmd = cmd;
+    const list = cmd.querySelector('#vb-cmd-list');
+    let cmdI = 0;
+    const renderCmd = () => {
+      list.innerHTML = '';
+      cmdItems.forEach((it, i) => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-selected', i === cmdI ? 'true' : 'false');
+        b.innerHTML = '<span>' + it.label + '</span><kbd>' + it.hint + '</kbd>';
+        b.addEventListener('click', () => { closeCmd(); it.run(); });
+        list.appendChild(b);
+      });
+    };
+    const openCmd = () => { cmdI = 0; renderCmd(); cmd.classList.add('open'); };
+    const closeCmd = () => cmd.classList.remove('open');
+    renderCmd();
+    const cmdBtn = document.getElementById('vb-cmd-btn');
+    const mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+    const chord = mac ? '⌘K' : 'Ctrl K';
+    if (cmdBtn) {
+      cmdBtn.textContent = chord;
+      cmdBtn.addEventListener('click', openCmd);
+    }
+    const footHint = document.getElementById('vb-foot-hint');
+    if (footHint) footHint.textContent = '© 2026 · Built in NYC · press ' + chord;
+    cmd.addEventListener('click', (e) => { if (e.target === cmd) closeCmd(); });
+    this._onCmdKey = (e) => {
+      const open = cmd.classList.contains('open');
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        e.preventDefault();
+        if (open) closeCmd(); else openCmd();
+        return;
+      }
+      if (!open) return;
+      if (e.key === 'Escape') { e.preventDefault(); closeCmd(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); cmdI = (cmdI + 1) % cmdItems.length; renderCmd(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); cmdI = (cmdI - 1 + cmdItems.length) % cmdItems.length; renderCmd(); }
+      else if (e.key === 'Enter') { e.preventDefault(); closeCmd(); cmdItems[cmdI].run(); }
+    };
+    document.addEventListener('keydown', this._onCmdKey);
 
     this.initSnake();
   }
@@ -1144,6 +1373,20 @@ class Component extends DCLogic {
         });
       }
     });
+    this._nameSnakes = snakes;
+    if (!h1.dataset.scatterBound) {
+      h1.dataset.scatterBound = '1';
+      h1.title = 'Click to scatter the snakes';
+      h1.addEventListener('click', () => {
+        const pack = this._nameSnakes || [];
+        pack.forEach(s => {
+          s._base = s.speed;
+          s.speed *= 5.5;
+          s.head = Math.random() * s.P;
+        });
+        setTimeout(() => pack.forEach(s => { s.speed = s._base || s.speed / 5.5; }), 1100);
+      });
+    }
 
     let last = performance.now();
     const tick = (now) => {
@@ -1188,11 +1431,15 @@ class Component extends DCLogic {
     if (this._barRaf) cancelAnimationFrame(this._barRaf);
     if (this._onBarMouse) document.removeEventListener('mousemove', this._onBarMouse);
     if (this._onBarClick) document.removeEventListener('click', this._onBarClick);
+    if (this._onCmdKey) document.removeEventListener('keydown', this._onCmdKey);
     if (this._snakeRaf) cancelAnimationFrame(this._snakeRaf);
     if (this._snakeRO) this._snakeRO.disconnect();
     if (this._onResize) window.removeEventListener('resize', this._onResize);
     if (this._cursor && this._cursor.parentNode) this._cursor.parentNode.removeChild(this._cursor);
+    if (this._trails) this._trails.forEach(t => { if (t.el && t.el.parentNode) t.el.parentNode.removeChild(t.el); });
     if (this._bar && this._bar.parentNode) this._bar.parentNode.removeChild(this._bar);
+    if (this._cmd && this._cmd.parentNode) this._cmd.parentNode.removeChild(this._cmd);
+    document.documentElement.classList.remove('vb-has-cursor');
   }
 
   renderVals() { return {}; }
