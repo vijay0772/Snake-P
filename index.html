@@ -117,6 +117,24 @@
   @keyframes vbnamesnake{0%{background-position:100% 0}100%{background-position:0% 0}}
   a:focus-visible,button:focus-visible{outline:2px solid var(--vb-accent);outline-offset:3px;border-radius:6px}
   @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none !important;transition:none !important}html{scroll-behavior:auto}}
+  @keyframes vbscroll{0%,100%{transform:translateY(0);opacity:.45}50%{transform:translateY(6px);opacity:1}}
+  html{scrollbar-color:var(--vb-border-3) var(--vb-bg);scrollbar-width:thin}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:var(--vb-bg)}
+  ::-webkit-scrollbar-thumb{background:var(--vb-border-3);border-radius:99px;border:2px solid var(--vb-bg)}
+  ::-webkit-scrollbar-thumb:hover{background:var(--vb-hover-border)}
+  #vb-nav > div > a{position:relative}
+  #vb-nav > div > a::after{content:'';position:absolute;left:0;bottom:-5px;width:100%;height:1px;background:var(--vb-accent);transform:scaleX(0);transform-origin:0 50%;transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+  #vb-nav > div > a:hover::after{transform:scaleX(1)}
+  [data-card]{transition:border-color .3s,transform .3s,box-shadow .35s !important}
+  [data-card]:hover{box-shadow:0 22px 48px -20px color-mix(in oklab, var(--vb-accent-fill) 28%, transparent)}
+  .vb-arr{display:inline-block;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  [data-card]:hover .vb-arr{transform:translate(4px,-4px)}
+  [data-filter]{-webkit-tap-highlight-color:transparent}
+  [data-filter][aria-pressed="false"]:hover{border-color:var(--vb-hover-border) !important;color:var(--vb-accent) !important}
+  [data-filter]:active{transform:scale(.95)}
+  [data-count]{font-variant-numeric:tabular-nums}
+  @media (max-height:620px){#vb-scrollhint{display:none}}
 </style>
 </helmet>
 <div id="vb-root" style="position:relative">
@@ -156,6 +174,7 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">Software Engineer · Halluminate <span style="color:var(--vb-accent)">(YC S25)</span> · NYC</span>
         </div>
       </div>
+      <div id="vb-scrollhint" aria-hidden="true" style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--vb-muted-3);transition:opacity .5s">SCROLL<span style="display:inline-block;color:var(--vb-accent);animation:vbscroll 1.8s ease-in-out infinite">↓</span></div>
     </section>
 
     <!-- STATS (quiet) -->
@@ -221,7 +240,7 @@
               <span style="position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 11px;border-radius:999px;background:var(--vb-accent-fill);color:var(--vb-on-accent);pointer-events:none">★ Hackathon Winner</span>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Orbit Guardians</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Orbit Guardians</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Real-time threat-detection app with live comms — built in 48 hours.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
@@ -252,7 +271,7 @@
               <span style="position:absolute;top:14px;left:14px;z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 11px;border-radius:999px;background:var(--vb-accent-fill);color:var(--vb-on-accent);pointer-events:none">★ Hackathon Winner</span>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">PastPort AI</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">PastPort AI</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Conversational AI on FastAPI + OpenAI with a real-time Flutter client.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Flutter</span>
@@ -282,7 +301,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">AfterImage</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">AfterImage</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">PDF Q&amp;A — ask questions and get answers with the evidence highlighted right in the document.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
@@ -311,7 +330,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Slack SQL Bot</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Slack SQL Bot</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Slack bot that turns natural-language questions into SQL via an agent loop, with thread memory.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">LangGraph</span>
@@ -341,7 +360,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">StitchFin Agent Gateway</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">StitchFin Agent Gateway</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Multi-tenant AI agent gateway — text and voice chat with retries, provider fallback, and cost analytics.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">FastAPI</span>
@@ -371,7 +390,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">V-Pharma Intel</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">V-Pharma Intel</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Clinical-trial and FDA-approval analytics — Python ETL pipelines plus a chat that turns questions into queries.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Next.js</span>
@@ -403,7 +422,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Proposal → ITB Automation</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Proposal → ITB Automation</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Ingests PDF and Excel proposals with an OCR fallback chain, structures them via LLM, and scores per-field confidence.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">FastAPI</span>
@@ -430,7 +449,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">QuickServe</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">QuickServe</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">End-to-end food delivery — ordering, live tracking, and restaurant management across four user roles.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">React</span>
@@ -457,7 +476,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">School Blogging Platform</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">School Blogging Platform</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Role-based academic blogging with an AI chatbot, smart search, and live weather insights.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">OpenAI</span>
@@ -483,7 +502,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">SmartHomes</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">SmartHomes</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Smart-home e-commerce with reviews, role management, and a retailer analytics dashboard.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Java</span>
@@ -507,7 +526,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">CraftsMan (Home Hub)</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">CraftsMan (Home Hub)</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Tool shopping and home-maintenance scheduling with a location-based service finder.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">JavaScript</span>
@@ -533,7 +552,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Quickquizz</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Quickquizz</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Category-based quiz platform with questions fetched dynamically over a REST API.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">Next.js</span>
@@ -559,7 +578,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Sarjani Industries</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Sarjani Industries</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">E-commerce front-end for a transformer-components manufacturer.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">HTML</span>
@@ -588,7 +607,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Marwiz</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">Marwiz</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">E-commerce site for a digital advertising company's service catalog.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">HTML</span>
@@ -615,7 +634,7 @@
               </div>
             </div>
             <div style="padding:24px 24px 28px;display:flex;flex-direction:column;gap:12px">
-              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">DigiMap</h3><span style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><h3 style="font-size:1.4rem;font-weight:600;letter-spacing:-0.02em">DigiMap</h3><span class="vb-arr" aria-hidden="true" style="font-family:'JetBrains Mono',monospace;color:var(--vb-accent)">↗</span></div>
               <p style="font-size:0.98rem;line-height:1.55;color:var(--vb-muted-1)">Marketing-services e-commerce site for a digital marketing agency.</p>
               <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:2px">
                 <span style="font-family:'JetBrains Mono',monospace;font-size:11px;padding:4px 9px;border-radius:7px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2)">HTML</span>
@@ -665,6 +684,10 @@
     <section id="contact" data-screen-label="Contact" style="scroll-margin-top:80px;padding:clamp(90px,15vh,200px) clamp(20px,5vw,72px);position:relative">
       <div aria-hidden="true" style="position:absolute;bottom:-10%;left:50%;width:min(700px,80vw);height:min(460px,60vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 11%, transparent),transparent 65%);filter:blur(20px);transform:translateX(-50%);z-index:0"></div>
       <div style="max-width:1080px;margin:0 auto;position:relative;z-index:1">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</span>
+          <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
+        </div>
         <h2 data-reveal="1" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
         <div data-reveal="1" data-delay="100" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
           <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
@@ -678,8 +701,9 @@
 
     <footer style="border-top:1px solid var(--vb-border-1);padding:30px clamp(20px,5vw,72px)">
       <div style="max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-4)">
-        <span>Vijay Bharvad</span>
+        <span style="display:inline-flex;align-items:center;gap:8px"><img src="./snake.png" alt="" width="14" height="14" style="filter:invert(60%) sepia(80%) saturate(1200%) hue-rotate(75deg)">Vijay Bharvad</span>
         <span>© 2026 · Built in NYC</span>
+        <a href="#top" style="color:var(--vb-muted-2)">Back to top <span style="color:var(--vb-accent)">↑</span></a>
       </div>
     </footer>
 
@@ -903,9 +927,11 @@ class Component extends DCLogic {
     this._barRaf = requestAnimationFrame(barTick);
     } // end !reduceMotion (border snake)
 
+    const scrollHint = root.querySelector('#vb-scrollhint');
     const onScroll = () => {
       const sc = document.documentElement.scrollHeight - window.innerHeight;
       barTarget = sc > 0 ? Math.min(1, window.scrollY / sc) : 0;
+      if (scrollHint) scrollHint.style.opacity = window.scrollY > 60 ? '0' : '1';
       if (window.scrollY > 40) {
         nav.style.background = 'var(--vb-nav-bg)';
         nav.style.borderBottomColor = 'var(--vb-border-1)';

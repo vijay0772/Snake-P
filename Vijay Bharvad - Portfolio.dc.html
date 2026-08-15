@@ -134,6 +134,7 @@
   [data-filter][aria-pressed="false"]:hover{border-color:var(--vb-hover-border) !important;color:var(--vb-accent) !important}
   [data-filter]:active{transform:scale(.95)}
   [data-count]{font-variant-numeric:tabular-nums}
+  @media (max-height:620px){#vb-scrollhint{display:none}}
 </style>
 </helmet>
 <div id="vb-root" style="position:relative">
@@ -173,6 +174,7 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">Software Engineer · Halluminate <span style="color:var(--vb-accent)">(YC S25)</span> · NYC</span>
         </div>
       </div>
+      <div id="vb-scrollhint" aria-hidden="true" style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--vb-muted-3);transition:opacity .5s">SCROLL<span style="display:inline-block;color:var(--vb-accent);animation:vbscroll 1.8s ease-in-out infinite">↓</span></div>
     </section>
 
     <!-- STATS (quiet) -->
@@ -682,6 +684,10 @@
     <section id="contact" data-screen-label="Contact" style="scroll-margin-top:80px;padding:clamp(90px,15vh,200px) clamp(20px,5vw,72px);position:relative">
       <div aria-hidden="true" style="position:absolute;bottom:-10%;left:50%;width:min(700px,80vw);height:min(460px,60vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 11%, transparent),transparent 65%);filter:blur(20px);transform:translateX(-50%);z-index:0"></div>
       <div style="max-width:1080px;margin:0 auto;position:relative;z-index:1">
+        <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</span>
+          <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
+        </div>
         <h2 data-reveal="1" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
         <div data-reveal="1" data-delay="100" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
           <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
@@ -695,8 +701,9 @@
 
     <footer style="border-top:1px solid var(--vb-border-1);padding:30px clamp(20px,5vw,72px)">
       <div style="max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-4)">
-        <span>Vijay Bharvad</span>
+        <span style="display:inline-flex;align-items:center;gap:8px"><img src="./snake.png" alt="" width="14" height="14" style="filter:invert(60%) sepia(80%) saturate(1200%) hue-rotate(75deg)">Vijay Bharvad</span>
         <span>© 2026 · Built in NYC</span>
+        <a href="#top" style="color:var(--vb-muted-2)">Back to top <span style="color:var(--vb-accent)">↑</span></a>
       </div>
     </footer>
 
@@ -920,9 +927,11 @@ class Component extends DCLogic {
     this._barRaf = requestAnimationFrame(barTick);
     } // end !reduceMotion (border snake)
 
+    const scrollHint = root.querySelector('#vb-scrollhint');
     const onScroll = () => {
       const sc = document.documentElement.scrollHeight - window.innerHeight;
       barTarget = sc > 0 ? Math.min(1, window.scrollY / sc) : 0;
+      if (scrollHint) scrollHint.style.opacity = window.scrollY > 60 ? '0' : '1';
       if (window.scrollY > 40) {
         nav.style.background = 'var(--vb-nav-bg)';
         nav.style.borderBottomColor = 'var(--vb-border-1)';
