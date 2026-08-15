@@ -156,9 +156,50 @@
   #vb-cmd-btn{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 8px;border-radius:8px;border:1px solid var(--vb-border-2);background:var(--vb-surface);color:var(--vb-muted-2);line-height:1}
   #vb-cmd-btn:hover{border-color:var(--vb-hover-border);color:var(--vb-accent)}
   .vb-trail{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9998;background:var(--vb-accent-fill);transform:translate(-50%,-50%)}
+  #vb-root::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(var(--vb-border-2) 1px,transparent 1px);background-size:26px 26px;opacity:.4;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 20%,transparent 75%)}
+  #vb-grain{position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+  :root[data-theme="light"] #vb-grain{opacity:.07;mix-blend-mode:multiply}
+  @keyframes vbspin{to{transform:rotate(360deg)}}
+  @keyframes vbshine{0%{transform:translateX(-130%) skewX(-18deg)}100%{transform:translateX(230%) skewX(-18deg)}}
+  @keyframes vbmarq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+  @keyframes vbstar{0%,100%{transform:translateY(0);opacity:.25}50%{transform:translateY(-14px);opacity:.9}}
+  @keyframes vbintro-out{to{opacity:0;visibility:hidden}}
+  @keyframes vborb2{0%,100%{opacity:.28;transform:translate(-50%,-50%) scale(1)}50%{opacity:.55;transform:translate(-50%,-50%) scale(1.18)}}
+  [data-card]{overflow:visible !important;isolation:isolate}
+  [data-card] > div:first-child{overflow:hidden;border-radius:18px 18px 0 0}
+  [data-card]::before{content:'';position:absolute;inset:-1px;border-radius:19px;background:conic-gradient(from 180deg,transparent 40%,var(--vb-accent-fill),transparent 68%);z-index:-1;opacity:0;transition:opacity .35s;animation:vbspin 2.8s linear infinite;pointer-events:none}
+  [data-card]:hover::before{opacity:1}
+  .vb-shine{position:relative;overflow:hidden}
+  .vb-shine::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent,color-mix(in oklab,var(--vb-on-accent) 28%,transparent),transparent);transform:translateX(-130%) skewX(-18deg);pointer-events:none}
+  .vb-shine:hover::after{animation:vbshine .7s ease}
+  .vb-marquee{overflow:hidden;border-top:1px solid var(--vb-border-1);border-bottom:1px solid var(--vb-border-1);padding:14px 0;mask-image:linear-gradient(90deg,transparent,black 8%,black 92%,transparent)}
+  .vb-marquee-track{display:flex;width:max-content;gap:0;animation:vbmarq 32s linear infinite}
+  .vb-marquee-track span{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--vb-muted-3);padding:0 28px;white-space:nowrap}
+  .vb-marquee-track span::before{content:'✦';color:var(--vb-accent);margin-right:28px}
+  .vb-jobs{position:relative;padding-left:28px}
+  .vb-jobs::before{content:'';position:absolute;left:4px;top:20px;bottom:20px;width:1px;background:linear-gradient(var(--vb-accent-fill),var(--vb-border-2))}
+  .vb-job{position:relative}
+  .vb-job::before{content:'';position:absolute;left:-28px;top:34px;width:9px;height:9px;border-radius:50%;background:var(--vb-accent-fill);box-shadow:0 0 0 4px color-mix(in oklab,var(--vb-accent-fill) 20%,transparent),0 0 16px var(--vb-accent-fill)}
+  .vb-stat{position:relative;padding-left:14px}
+  .vb-stat::before{content:'';position:absolute;left:0;top:6px;bottom:6px;width:2px;border-radius:2px;background:var(--vb-accent-fill);opacity:.35;transition:opacity .3s,box-shadow .3s}
+  .vb-stat:hover::before{opacity:1;box-shadow:0 0 12px var(--vb-accent-fill)}
+  .vb-mark{font-family:'JetBrains Mono',monospace;font-size:clamp(3.5rem,10vw,7rem);font-weight:700;letter-spacing:-.06em;color:var(--vb-accent);opacity:.08;line-height:.8;user-select:none;pointer-events:none}
+  .vb-grad{background:linear-gradient(120deg,var(--vb-text) 20%,var(--vb-accent) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  #vb-stars{position:absolute;inset:0;pointer-events:none;z-index:0}
+  #vb-stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--vb-accent);animation:vbstar 4.8s ease-in-out infinite}
+  #vb-intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:var(--vb-bg);transition:opacity .7s ease,visibility .7s}
+  #vb-intro.out{opacity:0;visibility:hidden}
+  #vb-intro b{display:grid;place-items:center;width:68px;height:68px;border-radius:16px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-family:'JetBrains Mono',monospace;font-size:22px;box-shadow:0 0 40px color-mix(in oklab,var(--vb-accent-fill) 45%,transparent)}
+  #vb-nyc{color:var(--vb-accent);font-variant-numeric:tabular-nums}
+  @media (prefers-reduced-motion: reduce){
+    .vb-marquee-track,[data-card]::before,#vb-stars i{animation:none !important}
+    #vb-intro{display:none}
+  }
 </style>
 </helmet>
 <div id="vb-root" style="position:relative">
+  <div id="vb-intro" aria-hidden="true"><b>VB</b></div>
+  <div id="vb-grain" aria-hidden="true"></div>
 
   <nav id="vb-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,5vw,72px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s">
     <a href="#top" style="display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:-0.02em;font-size:15px">
@@ -178,7 +219,9 @@
 
     <!-- HERO -->
     <section id="top" data-screen-label="Hero" style="min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px clamp(20px,5vw,72px) 80px;position:relative;overflow:hidden">
+      <div id="vb-stars" aria-hidden="true"></div>
       <div id="vb-hero-glow" aria-hidden="true" style="position:absolute;top:22%;left:56%;width:min(720px,74vw);height:min(720px,74vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 16%, transparent),transparent 60%);filter:blur(30px);animation:vbglow 9s ease-in-out infinite;z-index:0;--gx:0px;--gy:0px"></div>
+      <div aria-hidden="true" style="position:absolute;top:72%;left:14%;width:min(280px,40vw);height:min(280px,40vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 14%, transparent),transparent 62%);filter:blur(24px);animation:vborb2 11s ease-in-out infinite;z-index:0"></div>
       <div style="max-width:1080px;margin:0 auto;width:100%;position:relative;z-index:1">
         <div data-reveal="1" style="display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;border:1px solid var(--vb-badge-border);background:var(--vb-badge-bg);margin-bottom:clamp(22px,3vh,36px)">
           <span style="width:8px;height:8px;border-radius:50%;background:var(--vb-accent-fill);animation:vbpulse 1.8s ease-in-out infinite;box-shadow:0 0 12px var(--vb-accent-fill)"></span>
@@ -191,8 +234,8 @@
         </div>
         <p data-reveal="1" data-delay="160" style="font-size:clamp(1.15rem,2.4vw,1.8rem);line-height:1.3;letter-spacing:-0.02em;font-weight:500;max-width:22ch;color:var(--vb-text-soft)">Software engineer building <span style="color:var(--vb-accent);animation:vbaccentglow 3.6s ease-in-out infinite">AI systems</span> that ship to production.</p>
         <div data-reveal="1" data-delay="260" style="display:flex;flex-wrap:wrap;align-items:center;gap:22px;margin-top:clamp(32px,4vh,48px)">
-          <a href="#work" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">View work <span style="font-family:'JetBrains Mono',monospace">↗</span></a>
-          <a href="./Vijay_CV_2026.pdf" target="_blank" rel="noopener" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;border:1px solid var(--vb-btn2-border);background:var(--vb-badge-bg);color:var(--vb-btn2-text);font-weight:600;font-size:15px;transition:border-color .3s,box-shadow .3s,background .3s" style-hover="border-color:var(--vb-accent);box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 20%, transparent)">View resume <span style="font-family:'JetBrains Mono',monospace">↓</span></a>
+          <a href="#work" data-magnetic="1" class="vb-shine" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">View work <span style="font-family:'JetBrains Mono',monospace">↗</span></a>
+          <a href="./Vijay_CV_2026.pdf" target="_blank" rel="noopener" data-magnetic="1" class="vb-shine" style="display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:12px;border:1px solid var(--vb-btn2-border);background:var(--vb-badge-bg);color:var(--vb-btn2-text);font-weight:600;font-size:15px;transition:border-color .3s,box-shadow .3s,background .3s" style-hover="border-color:var(--vb-accent);box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 20%, transparent)">View resume <span style="font-family:'JetBrains Mono',monospace">↓</span></a>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">Software Engineer · Halluminate <span style="color:var(--vb-accent)">(YC S25)</span> · NYC</span>
         </div>
       </div>
@@ -202,19 +245,19 @@
     <!-- STATS (quiet) -->
     <section data-screen-label="Stats" style="border-top:1px solid var(--vb-border-1);border-bottom:1px solid var(--vb-border-1)">
       <div style="max-width:1080px;margin:0 auto;padding:clamp(36px,5vw,56px) clamp(20px,5vw,72px);display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:32px">
-        <div data-reveal="1" style="display:flex;flex-direction:column;gap:7px">
+        <div class="vb-stat" data-reveal="1" style="display:flex;flex-direction:column;gap:7px">
           <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="5">5</span><span style="color:var(--vb-accent)">K+</span></div>
           <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">users supported</div>
         </div>
-        <div data-reveal="1" data-delay="80" style="display:flex;flex-direction:column;gap:7px">
+        <div class="vb-stat" data-reveal="1" data-delay="80" style="display:flex;flex-direction:column;gap:7px">
           <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="2">2</span><span style="color:var(--vb-accent)">×</span></div>
           <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">faster loads</div>
         </div>
-        <div data-reveal="1" data-delay="160" style="display:flex;flex-direction:column;gap:7px">
+        <div class="vb-stat" data-reveal="1" data-delay="160" style="display:flex;flex-direction:column;gap:7px">
           <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="50">50</span><span style="color:var(--vb-accent)">%</span></div>
           <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">lower latency</div>
         </div>
-        <div data-reveal="1" data-delay="240" style="display:flex;flex-direction:column;gap:7px">
+        <div class="vb-stat" data-reveal="1" data-delay="240" style="display:flex;flex-direction:column;gap:7px">
           <div style="font-size:clamp(2.2rem,4vw,3rem);font-weight:600;letter-spacing:-0.03em;line-height:1"><span data-count="25">25</span><span style="color:var(--vb-accent)">%</span></div>
           <div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3)">engagement growth</div>
         </div>
@@ -228,10 +271,18 @@
       </div>
     </section>
 
+    <div class="vb-marquee" aria-hidden="true">
+      <div class="vb-marquee-track">
+        <span>Python</span><span>TypeScript</span><span>Django</span><span>React</span><span>AWS</span><span>Docker</span><span>PostgreSQL</span><span>LLM eval</span><span>Next.js</span><span>Node</span><span>Supabase</span><span>FastAPI</span>
+        <span>Python</span><span>TypeScript</span><span>Django</span><span>React</span><span>AWS</span><span>Docker</span><span>PostgreSQL</span><span>LLM eval</span><span>Next.js</span><span>Node</span><span>Supabase</span><span>FastAPI</span>
+      </div>
+    </div>
+
     <!-- WORK -->
     <section id="work" data-screen-label="Projects" style="scroll-margin-top:80px;padding:0 clamp(20px,5vw,72px) clamp(60px,9vh,120px)">
       <div style="max-width:1080px;margin:0 auto">
         <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:48px">
+          <span class="vb-mark">01</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Selected work</span>
           <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
         </div>
@@ -674,24 +725,27 @@
     <section id="about" data-screen-label="Experience" style="scroll-margin-top:80px;padding:clamp(60px,9vh,120px) clamp(20px,5vw,72px)">
       <div style="max-width:1080px;margin:0 auto">
         <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:20px">
+          <span class="vb-mark">02</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Experience</span>
           <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
         </div>
 
-        <a href="#work" data-reveal="1" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
+        <div class="vb-jobs">
+        <a href="#work" class="vb-job" data-reveal="1" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
           <span style="flex:1 1 220px;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.02em">Halluminate <span style="font-family:'JetBrains Mono',monospace;font-size:0.6em;font-weight:400;color:var(--vb-accent);vertical-align:middle">YC S25</span></span>
           <span style="flex:1 1 200px;color:var(--vb-muted-1)">Software Engineer · LLM evaluation APIs</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">2025 — Now</span>
         </a>
-        <div data-reveal="1" data-delay="80" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
+        <div class="vb-job" data-reveal="1" data-delay="80" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
           <span style="flex:1 1 220px;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.02em">Find Me LLC</span>
           <span style="flex:1 1 200px;color:var(--vb-muted-1)">Full-Stack Developer · Next.js / AWS platform</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">2024 — 25</span>
         </div>
-        <div data-reveal="1" data-delay="160" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
+        <div class="vb-job" data-reveal="1" data-delay="160" style="display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 24px;padding:26px 0;border-bottom:1px solid var(--vb-border-1);transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s" style-hover="transform:translateX(12px);border-bottom-color:var(--vb-hover-border-strong)">
           <span style="flex:1 1 220px;font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:600;letter-spacing:-0.02em">NEW EIC</span>
           <span style="flex:1 1 200px;color:var(--vb-muted-1)">SWE Intern · React / Node / Python · 1K+ users</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">2024</span>
+        </div>
         </div>
 
         <div data-reveal="1" data-delay="120" style="display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:34px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">
@@ -707,12 +761,13 @@
       <div aria-hidden="true" style="position:absolute;bottom:-10%;left:50%;width:min(700px,80vw);height:min(460px,60vw);border-radius:50%;background:radial-gradient(circle,color-mix(in oklab, var(--vb-accent-fill) 11%, transparent),transparent 65%);filter:blur(20px);transform:translateX(-50%);z-index:0"></div>
       <div style="max-width:1080px;margin:0 auto;position:relative;z-index:1">
         <div data-reveal="1" style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+          <span class="vb-mark">03</span>
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</span>
           <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
         </div>
-        <h2 data-reveal="1" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
+        <h2 data-reveal="1" class="vb-grad" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
         <div data-reveal="1" data-delay="100" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
-          <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
+          <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" class="vb-shine" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
           <button id="vb-copy-email" type="button" style="font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border-radius:10px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:border-color .25s,color .25s" style-hover="border-color:var(--vb-hover-border);color:var(--vb-accent)">Copy email</button>
           <a href="https://github.com/vijay0772" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> GitHub</a>
           <a href="https://www.linkedin.com/in/vijay-bharvad-a44085210/" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> LinkedIn</a>
@@ -724,7 +779,7 @@
     <footer style="border-top:1px solid var(--vb-border-1);padding:30px clamp(20px,5vw,72px)">
       <div style="max-width:1080px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-4)">
         <span style="display:inline-flex;align-items:center;gap:8px"><img src="./snake.png" alt="" width="14" height="14" style="filter:invert(60%) sepia(80%) saturate(1200%) hue-rotate(75deg)">Vijay Bharvad</span>
-        <span id="vb-foot-hint">© 2026 · Built in NYC</span>
+        <span id="vb-foot-hint">© 2026 · Built in NYC <span id="vb-nyc"></span></span>
         <a href="#top" style="color:var(--vb-muted-2)">Back to top <span style="color:var(--vb-accent)">↑</span></a>
       </div>
     </footer>
@@ -761,6 +816,39 @@ class Component extends DCLogic {
 
     this._reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const reduceMotion = this._reduceMotion;
+
+    const intro = document.getElementById('vb-intro');
+    if (intro) {
+      if (reduceMotion) intro.remove();
+      else {
+        this._introT = setTimeout(() => {
+          intro.classList.add('out');
+          setTimeout(() => intro.remove(), 750);
+        }, 720);
+      }
+    }
+
+    const stars = document.getElementById('vb-stars');
+    if (stars && !reduceMotion) {
+      for (let i = 0; i < 28; i++) {
+        const d = document.createElement('i');
+        d.style.left = (4 + Math.random() * 92) + '%';
+        d.style.top = (8 + Math.random() * 80) + '%';
+        d.style.animationDelay = (Math.random() * 4.8) + 's';
+        d.style.opacity = String(0.2 + Math.random() * 0.6);
+        stars.appendChild(d);
+      }
+    }
+
+    const nyc = document.getElementById('vb-nyc');
+    const tickNyc = () => {
+      if (!nyc) return;
+      try {
+        nyc.textContent = '· ' + new Date().toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      } catch (e) {}
+    };
+    tickNyc();
+    this._nycT = setInterval(tickNyc, 1000);
 
     // project category filters — cards stagger out / in instead of popping
     const chips = root.querySelectorAll('[data-filter]');
@@ -1224,7 +1312,11 @@ class Component extends DCLogic {
       cmdBtn.addEventListener('click', openCmd);
     }
     const footHint = document.getElementById('vb-foot-hint');
-    if (footHint) footHint.textContent = '© 2026 · Built in NYC · press ' + chord;
+    if (footHint) {
+      const clock = document.getElementById('vb-nyc');
+      footHint.childNodes[0].textContent = '© 2026 · Built in NYC · press ' + chord + ' ';
+      if (clock && !clock.parentNode) footHint.appendChild(clock);
+    }
     cmd.addEventListener('click', (e) => { if (e.target === cmd) closeCmd(); });
     this._onCmdKey = (e) => {
       const open = cmd.classList.contains('open');
@@ -1432,6 +1524,8 @@ class Component extends DCLogic {
     if (this._onBarMouse) document.removeEventListener('mousemove', this._onBarMouse);
     if (this._onBarClick) document.removeEventListener('click', this._onBarClick);
     if (this._onCmdKey) document.removeEventListener('keydown', this._onCmdKey);
+    if (this._introT) clearTimeout(this._introT);
+    if (this._nycT) clearInterval(this._nycT);
     if (this._snakeRaf) cancelAnimationFrame(this._snakeRaf);
     if (this._snakeRO) this._snakeRO.disconnect();
     if (this._onResize) window.removeEventListener('resize', this._onResize);
