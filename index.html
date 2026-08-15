@@ -140,7 +140,7 @@
   }
   .vb-spot{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .35s;z-index:3;mix-blend-mode:soft-light}
   [data-card]:hover .vb-spot{opacity:1}
-  [data-card].vb-card-out{opacity:0 !important;transform:scale(.92) !important;filter:blur(6px);pointer-events:none !important}
+  [data-card].vb-card-out{opacity:0 !important;transform:scale(.92) !important;pointer-events:none !important}
   #vb-nav a[data-nav].is-active{color:var(--vb-accent) !important}
   #vb-nav a[data-nav].is-active::after{transform:scaleX(1)}
   [data-words] .vb-w{color:var(--vb-muted-4);transition:color .35s}
@@ -157,8 +157,7 @@
   #vb-cmd-btn:hover{border-color:var(--vb-hover-border);color:var(--vb-accent)}
   .vb-trail{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9998;background:var(--vb-accent-fill);transform:translate(-50%,-50%)}
   #vb-root::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(var(--vb-border-2) 1px,transparent 1px);background-size:26px 26px;opacity:.4;mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 20%,transparent 75%)}
-  #vb-grain{position:fixed;inset:0;pointer-events:none;z-index:80;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
-  :root[data-theme="light"] #vb-grain{opacity:.07;mix-blend-mode:multiply}
+  [data-card]{content-visibility:auto;contain-intrinsic-size:auto 420px}
   @keyframes vbspin{to{transform:rotate(360deg)}}
   @keyframes vbshine{0%{transform:translateX(-130%) skewX(-18deg)}100%{transform:translateX(230%) skewX(-18deg)}}
   @keyframes vbmarq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -167,8 +166,8 @@
   @keyframes vborb2{0%,100%{opacity:.28;transform:translate(-50%,-50%) scale(1)}50%{opacity:.55;transform:translate(-50%,-50%) scale(1.18)}}
   [data-card]{overflow:visible !important;isolation:isolate}
   [data-card] > div:first-child{overflow:hidden;border-radius:18px 18px 0 0}
-  [data-card]::before{content:'';position:absolute;inset:-1px;border-radius:19px;background:conic-gradient(from 180deg,transparent 40%,var(--vb-accent-fill),transparent 68%);z-index:-1;opacity:0;transition:opacity .35s;animation:vbspin 2.8s linear infinite;pointer-events:none}
-  [data-card]:hover::before{opacity:1}
+  [data-card]::before{content:'';position:absolute;inset:-1px;border-radius:19px;background:conic-gradient(from 180deg,transparent 40%,var(--vb-accent-fill),transparent 68%);z-index:-1;opacity:0;transition:opacity .35s;pointer-events:none}
+  [data-card]:hover::before{opacity:1;animation:vbspin 2.8s linear infinite}
   .vb-shine{position:relative;overflow:hidden}
   .vb-shine::after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,transparent,color-mix(in oklab,var(--vb-on-accent) 28%,transparent),transparent);transform:translateX(-130%) skewX(-18deg);pointer-events:none}
   .vb-shine:hover::after{animation:vbshine .7s ease}
@@ -187,12 +186,12 @@
   .vb-grad{background:linear-gradient(120deg,var(--vb-text) 20%,var(--vb-accent) 80%);-webkit-background-clip:text;background-clip:text;color:transparent}
   #vb-stars{position:absolute;inset:0;pointer-events:none;z-index:0}
   #vb-stars i{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--vb-accent);animation:vbstar 4.8s ease-in-out infinite}
+  #top.off #vb-stars i{animation:none}
   #vb-intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:var(--vb-bg);transition:opacity .7s ease,visibility .7s}
   #vb-intro.out{opacity:0;visibility:hidden}
   #vb-intro b{display:grid;place-items:center;width:68px;height:68px;border-radius:16px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-family:'JetBrains Mono',monospace;font-size:22px;box-shadow:0 0 40px color-mix(in oklab,var(--vb-accent-fill) 45%,transparent)}
   #vb-nyc{color:var(--vb-accent);font-variant-numeric:tabular-nums}
-  #vb-lamp{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(520px circle at var(--lx,50%) var(--ly,35%),color-mix(in oklab,var(--vb-accent-fill) 14%,transparent),transparent 58%)}
-  :root[data-theme="light"] #vb-lamp{background:radial-gradient(520px circle at var(--lx,50%) var(--ly,35%),color-mix(in oklab,var(--vb-accent-fill) 22%,transparent),transparent 58%)}
+  .vb-marquee.is-off .vb-marquee-track{animation-play-state:paused}
   .vb-ripple{position:fixed;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:1.5px solid var(--vb-accent-fill);pointer-events:none;z-index:9997;animation:vbrip .65s ease-out forwards}
   @keyframes vbrip{to{transform:scale(18);opacity:0}}
   .vb-open{position:absolute;left:14px;right:14px;bottom:14px;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-size:13px;font-weight:600;letter-spacing:-.01em;opacity:0;transform:translateY(14px);transition:opacity .3s,transform .3s;pointer-events:none}
@@ -218,8 +217,6 @@
 </helmet>
 <div id="vb-root" style="position:relative">
   <div id="vb-intro" aria-hidden="true"><b>VB</b></div>
-  <div id="vb-grain" aria-hidden="true"></div>
-  <div id="vb-lamp" aria-hidden="true"></div>
   <div id="vb-tip" aria-hidden="true">OPEN</div>
 
   <nav id="vb-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,5vw,72px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s">
@@ -835,6 +832,7 @@ class Component extends DCLogic {
     const applyTheme = (t) => {
       document.documentElement.setAttribute('data-theme', t);
       if (themeBtn) themeBtn.textContent = t === 'light' ? '☾' : '☀';
+      if (this._resolveSnakeColors) this._resolveSnakeColors();
     };
     let theme = 'dark';
     try { theme = localStorage.getItem('vb-theme') || 'dark'; } catch (e) {}
@@ -868,7 +866,7 @@ class Component extends DCLogic {
 
     const stars = document.getElementById('vb-stars');
     if (stars && !reduceMotion) {
-      for (let i = 0; i < 28; i++) {
+      for (let i = 0; i < 8; i++) {
         const d = document.createElement('i');
         d.style.left = (4 + Math.random() * 92) + '%';
         d.style.top = (8 + Math.random() * 80) + '%';
@@ -886,7 +884,7 @@ class Component extends DCLogic {
       } catch (e) {}
     };
     tickNyc();
-    this._nycT = setInterval(tickNyc, 1000);
+    this._nycT = setInterval(tickNyc, 5000);
 
     // project category filters — cards stagger out / in instead of popping
     const chips = root.querySelectorAll('[data-filter]');
@@ -955,7 +953,7 @@ class Component extends DCLogic {
     document.body.appendChild(cv);
     this._bar = cv;
     const bctx = cv.getContext('2d');
-    const SEGS = 46, SPACING = 7, MARGIN = 11;
+    const SEGS = 22, SPACING = 11, MARGIN = 11;
     const pts = [];
     for (let i = 0; i < SEGS; i++) pts.push({ x: MARGIN + 40 - i * SPACING, y: MARGIN });
     let headD = 0, btick = 0, mx = -9999, my = -9999;
@@ -1006,21 +1004,25 @@ class Component extends DCLogic {
       return { x: MARGIN, y: MARGIN + h - d, a: -Math.PI / 2 };
     };
 
+    this._resolveSnakeColors = resolveColors;
     const barTick = () => {
+      if (document.hidden) { this._barRaf = 0; return; }
       btick++;
-      if (btick % 45 === 0) resolveColors(); // stay in sync with theme toggle
       const W = window.innerWidth, H = window.innerHeight;
-      const dpr = window.devicePixelRatio || 1;
+      const total = 2 * (W - MARGIN * 2) + 2 * (H - MARGIN * 2);
+      const targetD = barTarget * (total - 2);
+      const moving = Math.abs(targetD - headD) > 1.5;
+      if (!moving && Math.hypot(mx - pts[0].x, my - pts[0].y) > 90 && (btick % 2)) {
+        this._barRaf = requestAnimationFrame(barTick);
+        return;
+      }
+      const dpr = Math.min(1.5, window.devicePixelRatio || 1);
       if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) {
         cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       }
       bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       bctx.clearRect(0, 0, W, H);
-      const total = 2 * (W - MARGIN * 2) + 2 * (H - MARGIN * 2);
-
-      const targetD = barTarget * (total - 2);
       headD += (targetD - headD) * 0.06;
-      const moving = Math.abs(targetD - headD) > 1.5;
 
       // head seeks a point on the loop, offset by a slither wave
       const p = periPoint(headD, W, H);
@@ -1045,16 +1047,6 @@ class Component extends DCLogic {
         pts[i].x += (nx - pts[i].x) * 0.6;
         pts[i].y += (ny - pts[i].y) * 0.6;
       }
-
-      // faint trail over the part of the border already covered
-      bctx.strokeStyle = colFill;
-      bctx.globalAlpha = 0.2;
-      bctx.lineWidth = 2;
-      bctx.beginPath();
-      bctx.moveTo(MARGIN, MARGIN);
-      for (let d = 12; d <= headD; d += 12) { const q = periPoint(d, W, H); bctx.lineTo(q.x, q.y); }
-      bctx.stroke();
-      bctx.globalAlpha = 1;
 
       // tapered body
       bctx.fillStyle = colFill;
@@ -1082,7 +1074,6 @@ class Component extends DCLogic {
         bctx.moveTo(0, -12 - ext); bctx.lineTo(3, -16 - ext);
         bctx.stroke();
       }
-      bctx.shadowColor = colFill; bctx.shadowBlur = 10;
       if (headSprite) bctx.drawImage(headSprite, -14, -14, 28, 28);
       else { bctx.fillStyle = colFill; bctx.beginPath(); bctx.arc(0, 0, 8, 0, Math.PI * 2); bctx.fill(); }
       bctx.restore();
@@ -1098,6 +1089,7 @@ class Component extends DCLogic {
       }
       this._barRaf = requestAnimationFrame(barTick);
     };
+    this._startBar = () => { if (!this._barRaf) this._barRaf = requestAnimationFrame(barTick); };
     this._barRaf = requestAnimationFrame(barTick);
     } // end !reduceMotion (border snake)
 
@@ -1152,12 +1144,9 @@ class Component extends DCLogic {
         nav.style.webkitBackdropFilter = 'none';
       }
       updateWords();
-      if (!reduceMotion) {
-        const y = window.scrollY;
+      if (!reduceMotion && window.scrollY < window.innerHeight) {
         const nameWrap = document.getElementById('vb-name-wrap');
-        if (nameWrap) nameWrap.style.transform = 'translateY(' + (y * 0.18) + 'px)';
-        const hero = document.getElementById('top');
-        if (hero) hero.style.opacity = String(Math.max(0.15, 1 - y / 700));
+        if (nameWrap) nameWrap.style.transform = 'translateY(' + (window.scrollY * 0.12) + 'px)';
       }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -1184,7 +1173,6 @@ class Component extends DCLogic {
         el.style.opacity = '0';
         el.style.transform = 'translateY(28px)';
         el.style.transition = 'opacity .85s cubic-bezier(.2,.7,.2,1), transform .85s cubic-bezier(.2,.7,.2,1)';
-        el.style.willChange = 'opacity, transform';
       });
       const io = new IntersectionObserver((ents) => {
         ents.forEach(e => {
@@ -1219,11 +1207,11 @@ class Component extends DCLogic {
       document.documentElement.classList.add('vb-has-cursor');
       const dot = document.createElement('div');
       const snakeMask = "url('./icons8-year-of-snake-16.png') center / contain no-repeat";
-      dot.style.cssText = 'position:fixed;top:0;left:0;width:26px;height:26px;background:var(--vb-accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .22s,height .22s,background .22s;-webkit-mask:' + snakeMask + ';mask:' + snakeMask + ';filter:drop-shadow(0 0 8px color-mix(in oklab, var(--vb-accent-fill) 60%, transparent))';
+      dot.style.cssText = 'position:fixed;top:0;left:0;width:26px;height:26px;background:var(--vb-accent);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .22s,height .22s,background .22s;-webkit-mask:' + snakeMask + ';mask:' + snakeMask;
       document.body.appendChild(dot);
       this._cursor = dot;
       this._trails = [];
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 3; i++) {
         const t = document.createElement('div');
         t.className = 'vb-trail';
         const s = 12 - i;
@@ -1236,18 +1224,19 @@ class Component extends DCLogic {
       let tx = 0, ty = 0, cx = 0, cy = 0, gx = 0, gy = 0;
       window.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; });
       const loop = () => {
-        cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+        if (document.hidden) { this._raf = 0; return; }
+        cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
         dot.style.left = cx + 'px'; dot.style.top = cy + 'px';
         let px = cx, py = cy;
         this._trails.forEach((tr, i) => {
-          const ease = 0.28 - i * 0.025;
+          const ease = 0.32 - i * 0.04;
           tr.x += (px - tr.x) * ease;
           tr.y += (py - tr.y) * ease;
           tr.el.style.left = tr.x + 'px';
           tr.el.style.top = tr.y + 'px';
           px = tr.x; py = tr.y;
         });
-        if (glow) {
+        if (glow && this._heroOn) {
           const twx = (tx - window.innerWidth * 0.56) * 0.12;
           const twy = (ty - window.innerHeight * 0.32) * 0.1;
           gx += (twx - gx) * 0.06; gy += (twy - gy) * 0.06;
@@ -1256,6 +1245,7 @@ class Component extends DCLogic {
         }
         this._raf = requestAnimationFrame(loop);
       };
+      this._startCursor = () => { if (!this._raf) this._raf = requestAnimationFrame(loop); };
       loop();
       root.querySelectorAll('a,button,[data-magnetic]').forEach(el => {
         el.addEventListener('mouseenter', () => { dot.style.width = '46px'; dot.style.height = '46px'; dot.style.background = 'var(--vb-snake-head)'; });
@@ -1310,15 +1300,18 @@ class Component extends DCLogic {
         }
         return;
       }
+      let tiltRaf = 0;
       card.addEventListener('mousemove', (ev) => {
-        const r = card.getBoundingClientRect();
-        const x = (ev.clientX - r.left) / r.width;
-        const y = (ev.clientY - r.top) / r.height;
-        const rx = (0.5 - y) * 11;
-        const ry = (x - 0.5) * 14;
-        card.style.transform = 'perspective(900px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg) translateY(-8px)';
-        spot.style.background = 'radial-gradient(420px circle at ' + (x * 100).toFixed(1) + '% ' + (y * 100).toFixed(1) + '%, color-mix(in oklab, var(--vb-accent-fill) 42%, transparent), transparent 58%)';
-        if (img) img.style.transform = 'scale(1.07)';
+        if (tiltRaf) return;
+        tiltRaf = requestAnimationFrame(() => {
+          tiltRaf = 0;
+          const r = card.getBoundingClientRect();
+          const x = (ev.clientX - r.left) / r.width;
+          const y = (ev.clientY - r.top) / r.height;
+          card.style.transform = 'perspective(900px) rotateX(' + ((0.5 - y) * 11).toFixed(2) + 'deg) rotateY(' + ((x - 0.5) * 14).toFixed(2) + 'deg) translateY(-8px)';
+          spot.style.background = 'radial-gradient(280px circle at ' + (x * 100).toFixed(1) + '% ' + (y * 100).toFixed(1) + '%, color-mix(in oklab, var(--vb-accent-fill) 36%, transparent), transparent 58%)';
+          if (img) img.style.transform = 'scale(1.07)';
+        });
       });
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
@@ -1392,9 +1385,10 @@ class Component extends DCLogic {
 
     const tipEl = document.getElementById('vb-tip');
     this._onLamp = (e) => {
-      document.documentElement.style.setProperty('--lx', e.clientX + 'px');
-      document.documentElement.style.setProperty('--ly', e.clientY + 'px');
-      if (tipEl) { tipEl.style.left = e.clientX + 'px'; tipEl.style.top = e.clientY + 'px'; }
+      if (tipEl && tipEl.classList.contains('on')) {
+        tipEl.style.left = e.clientX + 'px';
+        tipEl.style.top = e.clientY + 'px';
+      }
     };
     document.addEventListener('mousemove', this._onLamp);
     this._onRipple = (e) => {
@@ -1437,6 +1431,34 @@ class Component extends DCLogic {
         el.addEventListener('mouseleave', () => { el.style.transform = ''; });
       });
     }
+
+    this._heroOn = true;
+    const heroEl = document.getElementById('top');
+    if (heroEl) {
+      const hio = new IntersectionObserver((ents) => {
+        ents.forEach(e => {
+          this._heroOn = e.isIntersecting;
+          this._nameSnakeOn = e.isIntersecting;
+          e.target.classList.toggle('off', !e.isIntersecting);
+          if (e.isIntersecting && this._startNameSnake) this._startNameSnake();
+        });
+      }, { threshold: 0 });
+      hio.observe(heroEl);
+    }
+    const mq = root.querySelector('.vb-marquee');
+    if (mq) {
+      const mio = new IntersectionObserver((ents) => {
+        ents.forEach(e => e.target.classList.toggle('is-off', !e.isIntersecting));
+      }, { threshold: 0 });
+      mio.observe(mq);
+    }
+    this._onVis = () => {
+      if (document.hidden) return;
+      if (this._startBar) this._startBar();
+      if (this._startCursor) this._startCursor();
+      if (this._startNameSnake) this._startNameSnake();
+    };
+    document.addEventListener('visibilitychange', this._onVis);
 
     this.initSnake();
   }
@@ -1543,7 +1565,7 @@ class Component extends DCLogic {
     targets.forEach((guide, idx) => {
       const P = guide.getTotalLength();
       for (let sIdx = 0; sIdx < SNAKES_PER_WORD; sIdx++) {
-        const COUNT = 15;
+        const COUNT = 8;
         const headR = Math.max(3.5, FS * 0.04);
         const segs = [];
         for (let i = 0; i < COUNT; i++) {
@@ -1552,9 +1574,7 @@ class Component extends DCLogic {
           c.setAttribute('r', (headR * (1 - t * 0.72)).toFixed(2));
           c.style.fill = i === 0 ? 'var(--vb-snake-head)' : 'var(--vb-accent-fill)';
           c.setAttribute('opacity', (1 - t * 0.72).toFixed(2));
-          c.style.filter = i === 0
-            ? 'drop-shadow(0 0 ' + (headR * 1.5) + 'px var(--vb-accent-fill))'
-            : 'drop-shadow(0 0 ' + (headR * 0.7) + 'px color-mix(in oklab, var(--vb-accent-fill) 60%, transparent))';
+          if (i === 0) c.style.filter = 'drop-shadow(0 0 ' + (headR * 1.2) + 'px var(--vb-accent-fill))';
           svg.appendChild(c);
           segs.push(c);
         }
@@ -1585,8 +1605,10 @@ class Component extends DCLogic {
       });
     }
 
+    this._nameSnakeOn = true;
     let last = performance.now();
     const tick = (now) => {
+      if (document.hidden || !this._nameSnakeOn) { this._snakeRaf = 0; return; }
       const dt = Math.min(0.05, (now - last) / 1000); last = now;
       snakes.forEach((s) => {
         s.head = (s.head + dt * s.speed) % s.P;
@@ -1606,6 +1628,7 @@ class Component extends DCLogic {
       });
       this._snakeRaf = requestAnimationFrame(tick);
     };
+    this._startNameSnake = () => { if (!this._snakeRaf && this._nameSnakeOn) this._snakeRaf = requestAnimationFrame(tick); };
     this._snakeRaf = requestAnimationFrame(tick);
   }
 
@@ -1631,6 +1654,7 @@ class Component extends DCLogic {
     if (this._onCmdKey) document.removeEventListener('keydown', this._onCmdKey);
     if (this._onLamp) document.removeEventListener('mousemove', this._onLamp);
     if (this._onRipple) document.removeEventListener('click', this._onRipple);
+    if (this._onVis) document.removeEventListener('visibilitychange', this._onVis);
     if (this._introT) clearTimeout(this._introT);
     if (this._nycT) clearInterval(this._nycT);
     if (this._snakeRaf) cancelAnimationFrame(this._snakeRaf);
