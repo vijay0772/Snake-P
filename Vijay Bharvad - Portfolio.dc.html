@@ -191,15 +191,36 @@
   #vb-intro.out{opacity:0;visibility:hidden}
   #vb-intro b{display:grid;place-items:center;width:68px;height:68px;border-radius:16px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-family:'JetBrains Mono',monospace;font-size:22px;box-shadow:0 0 40px color-mix(in oklab,var(--vb-accent-fill) 45%,transparent)}
   #vb-nyc{color:var(--vb-accent);font-variant-numeric:tabular-nums}
+  #vb-lamp{position:fixed;inset:0;pointer-events:none;z-index:2;background:radial-gradient(520px circle at var(--lx,50%) var(--ly,35%),color-mix(in oklab,var(--vb-accent-fill) 14%,transparent),transparent 58%)}
+  :root[data-theme="light"] #vb-lamp{background:radial-gradient(520px circle at var(--lx,50%) var(--ly,35%),color-mix(in oklab,var(--vb-accent-fill) 22%,transparent),transparent 58%)}
+  .vb-ripple{position:fixed;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;border:1.5px solid var(--vb-accent-fill);pointer-events:none;z-index:9997;animation:vbrip .65s ease-out forwards}
+  @keyframes vbrip{to{transform:scale(18);opacity:0}}
+  .vb-open{position:absolute;left:14px;right:14px;bottom:14px;z-index:4;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-size:13px;font-weight:600;letter-spacing:-.01em;opacity:0;transform:translateY(14px);transition:opacity .3s,transform .3s;pointer-events:none}
+  [data-card]:hover .vb-open{opacity:1;transform:none}
+  #vb-tip{position:fixed;z-index:10000;padding:4px 8px;border-radius:6px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;pointer-events:none;opacity:0;transform:translate(14px,10px);transition:opacity .18s}
+  #vb-tip.on{opacity:1}
+  .vb-letter{display:inline-block;transition:transform .28s cubic-bezier(.2,.7,.2,1)}
+  .vb-letter:hover{transform:translateY(-10px) scale(1.06);color:var(--vb-accent)}
+  .vb-skill{display:inline-flex;padding:6px 12px;border-radius:999px;border:1px solid var(--vb-border-3);color:var(--vb-muted-2);transition:transform .25s,border-color .25s,color .25s,background .25s}
+  .vb-skill:hover{border-color:var(--vb-accent);color:var(--vb-accent);background:color-mix(in oklab,var(--vb-accent-fill) 12%,transparent)}
+  .vb-marquee:hover .vb-marquee-track{animation-play-state:paused}
+  .vb-marquee-track.rev{animation-duration:40s;animation-direction:reverse;opacity:.7}
+  #vb-pcnt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--vb-muted-3);margin-left:auto}
+  ::view-transition-old(root){animation:none;mix-blend-mode:normal;z-index:1}
+  ::view-transition-new(root){animation:vbwipe .55s ease;mix-blend-mode:normal;z-index:2}
+  @keyframes vbwipe{from{clip-path:circle(0 at var(--vt-x,50%) var(--vt-y,50%))}to{clip-path:circle(150% at var(--vt-x,50%) var(--vt-y,50%))}}
   @media (prefers-reduced-motion: reduce){
-    .vb-marquee-track,[data-card]::before,#vb-stars i{animation:none !important}
+    .vb-marquee-track,[data-card]::before,#vb-stars i,.vb-ripple{animation:none !important}
     #vb-intro{display:none}
+    ::view-transition-new(root){animation:none}
   }
 </style>
 </helmet>
 <div id="vb-root" style="position:relative">
   <div id="vb-intro" aria-hidden="true"><b>VB</b></div>
   <div id="vb-grain" aria-hidden="true"></div>
+  <div id="vb-lamp" aria-hidden="true"></div>
+  <div id="vb-tip" aria-hidden="true">OPEN</div>
 
   <nav id="vb-nav" style="position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(20px,5vw,72px);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,backdrop-filter .3s">
     <a href="#top" style="display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:-0.02em;font-size:15px">
@@ -276,6 +297,10 @@
         <span>Python</span><span>TypeScript</span><span>Django</span><span>React</span><span>AWS</span><span>Docker</span><span>PostgreSQL</span><span>LLM eval</span><span>Next.js</span><span>Node</span><span>Supabase</span><span>FastAPI</span>
         <span>Python</span><span>TypeScript</span><span>Django</span><span>React</span><span>AWS</span><span>Docker</span><span>PostgreSQL</span><span>LLM eval</span><span>Next.js</span><span>Node</span><span>Supabase</span><span>FastAPI</span>
       </div>
+      <div class="vb-marquee-track rev">
+        <span>Halluminate</span><span>YC S25</span><span>NYC</span><span>Founding roles</span><span>Production AI</span><span>LLM eval</span><span>Event-driven</span><span>APIs</span>
+        <span>Halluminate</span><span>YC S25</span><span>NYC</span><span>Founding roles</span><span>Production AI</span><span>LLM eval</span><span>Event-driven</span><span>APIs</span>
+      </div>
     </div>
 
     <!-- WORK -->
@@ -286,11 +311,12 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Selected work</span>
           <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
         </div>
-        <div data-reveal="1" id="vb-filters" role="group" aria-label="Filter projects" style="display:flex;flex-wrap:wrap;gap:10px;margin:-16px 0 40px">
+        <div data-reveal="1" id="vb-filters" role="group" aria-label="Filter projects" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:-16px 0 40px">
           <button type="button" data-filter="all" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">All</button>
           <button type="button" data-filter="ai" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">AI / LLM</button>
           <button type="button" data-filter="fullstack" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">Full-Stack</button>
           <button type="button" data-filter="web" style="font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 16px;border-radius:999px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:background .25s,color .25s,border-color .25s">Client Sites</button>
+          <span id="vb-pcnt">15 projects</span>
         </div>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:clamp(20px,2.5vw,32px);perspective:1200px">
 
@@ -748,10 +774,15 @@
         </div>
         </div>
 
-        <div data-reveal="1" data-delay="120" style="display:flex;flex-wrap:wrap;gap:8px 28px;margin-top:34px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">
+        <div data-reveal="1" data-delay="120" style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:34px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-muted-3)">
           <span><span style="color:var(--vb-accent)">EDU</span> M.S. CS, Illinois Tech · 2025</span>
-          <span style="color:var(--vb-faint)">/</span>
-          <span>Python · TypeScript · Django · React · AWS · Docker · PostgreSQL</span>
+          <span class="vb-skill">Python</span>
+          <span class="vb-skill">TypeScript</span>
+          <span class="vb-skill">Django</span>
+          <span class="vb-skill">React</span>
+          <span class="vb-skill">AWS</span>
+          <span class="vb-skill">Docker</span>
+          <span class="vb-skill">PostgreSQL</span>
         </div>
       </div>
     </section>
@@ -765,13 +796,13 @@
           <span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--vb-accent)">Contact</span>
           <span style="flex:1;height:1px;background:var(--vb-border-2)"></span>
         </div>
-        <h2 data-reveal="1" class="vb-grad" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
+        <h2 id="vb-contact-title" data-reveal="1" class="vb-grad" style="font-size:clamp(2.6rem,8vw,6rem);line-height:0.94;letter-spacing:-0.04em;font-weight:700;margin-bottom:38px">Let's build<br>something.</h2>
         <div data-reveal="1" data-delay="100" style="display:flex;flex-wrap:wrap;align-items:center;gap:18px 32px">
           <a href="mailto:vijaybharvad0097@gmail.com" data-magnetic="1" class="vb-shine" style="display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:12px;background:var(--vb-accent-fill);color:var(--vb-on-accent);font-weight:600;font-size:15px;transition:box-shadow .3s" style-hover="box-shadow:0 12px 40px color-mix(in oklab, var(--vb-accent-fill) 35%, transparent)">vijaybharvad0097@gmail.com</a>
           <button id="vb-copy-email" type="button" style="font-family:'JetBrains Mono',monospace;font-size:13px;padding:10px 16px;border-radius:10px;border:1px solid var(--vb-border-3);background:transparent;color:var(--vb-muted-2);cursor:pointer;transition:border-color .25s,color .25s" style-hover="border-color:var(--vb-hover-border);color:var(--vb-accent)">Copy email</button>
-          <a href="https://github.com/vijay0772" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> GitHub</a>
-          <a href="https://www.linkedin.com/in/vijay-bharvad-a44085210/" target="_blank" rel="noopener" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> LinkedIn</a>
-          <a href="tel:+15716042926" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">☎</span> (571) 604-2926</a>
+          <a href="https://github.com/vijay0772" target="_blank" rel="noopener" data-magnetic="1" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> GitHub</a>
+          <a href="https://www.linkedin.com/in/vijay-bharvad-a44085210/" target="_blank" rel="noopener" data-magnetic="1" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">↗</span> LinkedIn</a>
+          <a href="tel:+15716042926" data-magnetic="1" style="font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--vb-muted-1)"><span style="color:var(--vb-accent)">☎</span> (571) 604-2926</a>
         </div>
       </div>
     </section>
@@ -808,10 +839,17 @@ class Component extends DCLogic {
     let theme = 'dark';
     try { theme = localStorage.getItem('vb-theme') || 'dark'; } catch (e) {}
     applyTheme(theme);
-    if (themeBtn) themeBtn.addEventListener('click', () => {
+    if (themeBtn) themeBtn.addEventListener('click', (e) => {
       theme = theme === 'light' ? 'dark' : 'light';
-      applyTheme(theme);
-      try { localStorage.setItem('vb-theme', theme); } catch (e) {}
+      const flip = () => {
+        applyTheme(theme);
+        try { localStorage.setItem('vb-theme', theme); } catch (err) {}
+      };
+      if (!this._reduceMotion && document.startViewTransition) {
+        document.documentElement.style.setProperty('--vt-x', e.clientX + 'px');
+        document.documentElement.style.setProperty('--vt-y', e.clientY + 'px');
+        document.startViewTransition(flip);
+      } else flip();
     });
 
     this._reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -868,12 +906,12 @@ class Component extends DCLogic {
         const cats = (card.getAttribute('data-cat') || '').split(' ');
         const show = (f === 'all' || cats.indexOf(f) !== -1);
         if (show) {
+          showI++;
           card.style.display = 'flex';
           card.style.opacity = '1';
           if (reduceMotion) { card.classList.remove('vb-card-out'); return; }
           card.classList.add('vb-card-out');
-          const delay = showI * 50;
-          showI++;
+          const delay = (showI - 1) * 50;
           setTimeout(() => card.classList.remove('vb-card-out'), 20 + delay);
         } else if (reduceMotion) {
           card.style.display = 'none';
@@ -881,6 +919,8 @@ class Component extends DCLogic {
           card.classList.add('vb-card-out');
         }
       });
+      const pcnt = document.getElementById('vb-pcnt');
+      if (pcnt) pcnt.textContent = showI + (showI === 1 ? ' project' : ' projects');
       if (!reduceMotion) {
         filterTimer = setTimeout(() => {
           cards.forEach(card => {
@@ -1112,6 +1152,13 @@ class Component extends DCLogic {
         nav.style.webkitBackdropFilter = 'none';
       }
       updateWords();
+      if (!reduceMotion) {
+        const y = window.scrollY;
+        const nameWrap = document.getElementById('vb-name-wrap');
+        if (nameWrap) nameWrap.style.transform = 'translateY(' + (y * 0.18) + 'px)';
+        const hero = document.getElementById('top');
+        if (hero) hero.style.opacity = String(Math.max(0.15, 1 - y / 700));
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -1242,10 +1289,20 @@ class Component extends DCLogic {
     root.querySelectorAll('[data-card]').forEach(card => {
       const img = card.querySelector('image-slot,[data-cover]');
       if (img) img.style.transition = 'transform .5s cubic-bezier(.2,.7,.2,1)';
+      const cover = card.querySelector('[data-cover]')?.parentElement;
+      if (cover && !cover.querySelector('.vb-open')) {
+        const open = document.createElement('div');
+        open.className = 'vb-open';
+        open.innerHTML = '<span>Open project</span><span>↗</span>';
+        cover.appendChild(open);
+      }
       const spot = document.createElement('div');
       spot.className = 'vb-spot';
       card.style.position = 'relative';
       card.appendChild(spot);
+      const tip = document.getElementById('vb-tip');
+      card.addEventListener('mouseenter', () => { if (tip) tip.classList.add('on'); });
+      card.addEventListener('mouseleave', () => { if (tip) tip.classList.remove('on'); });
       if (!fine || reduceMotion) {
         if (img) {
           card.addEventListener('mouseenter', () => { img.style.transform = 'scale(1.06)'; });
@@ -1332,6 +1389,54 @@ class Component extends DCLogic {
       else if (e.key === 'Enter') { e.preventDefault(); closeCmd(); cmdItems[cmdI].run(); }
     };
     document.addEventListener('keydown', this._onCmdKey);
+
+    const tipEl = document.getElementById('vb-tip');
+    this._onLamp = (e) => {
+      document.documentElement.style.setProperty('--lx', e.clientX + 'px');
+      document.documentElement.style.setProperty('--ly', e.clientY + 'px');
+      if (tipEl) { tipEl.style.left = e.clientX + 'px'; tipEl.style.top = e.clientY + 'px'; }
+    };
+    document.addEventListener('mousemove', this._onLamp);
+    this._onRipple = (e) => {
+      if (reduceMotion || e.target.closest('#vb-cmd')) return;
+      const r = document.createElement('span');
+      r.className = 'vb-ripple';
+      r.style.left = e.clientX + 'px';
+      r.style.top = e.clientY + 'px';
+      document.body.appendChild(r);
+      setTimeout(() => r.remove(), 650);
+    };
+    document.addEventListener('click', this._onRipple);
+
+    const ct = document.getElementById('vb-contact-title');
+    if (ct && !reduceMotion) {
+      const walk = (node) => {
+        if (node.nodeType === 3) {
+          const frag = document.createDocumentFragment();
+          Array.from(node.textContent).forEach(ch => {
+            if (ch === ' ' || ch === '\n') { frag.appendChild(document.createTextNode(ch)); return; }
+            const s = document.createElement('span');
+            s.className = 'vb-letter';
+            s.textContent = ch;
+            frag.appendChild(s);
+          });
+          node.parentNode.replaceChild(frag, node);
+        } else if (node.nodeType === 1 && node.tagName !== 'BR') {
+          Array.from(node.childNodes).forEach(walk);
+        }
+      };
+      Array.from(ct.childNodes).forEach(walk);
+    }
+
+    if (fine && !reduceMotion) {
+      root.querySelectorAll('.vb-skill').forEach(el => {
+        el.addEventListener('mousemove', (ev) => {
+          const r = el.getBoundingClientRect();
+          el.style.transform = 'translate(' + ((ev.clientX - r.left - r.width / 2) * 0.28) + 'px,' + ((ev.clientY - r.top - r.height / 2) * 0.4) + 'px)';
+        });
+        el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+      });
+    }
 
     this.initSnake();
   }
@@ -1524,6 +1629,8 @@ class Component extends DCLogic {
     if (this._onBarMouse) document.removeEventListener('mousemove', this._onBarMouse);
     if (this._onBarClick) document.removeEventListener('click', this._onBarClick);
     if (this._onCmdKey) document.removeEventListener('keydown', this._onCmdKey);
+    if (this._onLamp) document.removeEventListener('mousemove', this._onLamp);
+    if (this._onRipple) document.removeEventListener('click', this._onRipple);
     if (this._introT) clearTimeout(this._introT);
     if (this._nycT) clearInterval(this._nycT);
     if (this._snakeRaf) cancelAnimationFrame(this._snakeRaf);
